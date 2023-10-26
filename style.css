@@ -1,0 +1,130 @@
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+}
+
+#my-photo {
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 100px;
+    height: auto;
+}
+
+#intro {
+    display: flex;
+}
+
+#about-me {
+    margin-top: 20px;
+}
+
+#about-me h1 {
+    font-size: 24px;
+}
+
+#about-me p {
+    font-size: 18px;
+}
+
+.fact {
+    width: auto; 
+    padding: 10px 20px; 
+    border: 1px solid rgb(183, 183, 183);
+    text-align: center;
+    display: inline-block; 
+    margin: 10px;  
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+  
+
+.fact:hover {
+    background-color: rgba(172, 164, 150, 0.979);
+    font-weight: 700;
+}
+
+#projects a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: none;
+    color: rgb(255, 153, 36);
+}
+
+#resume a {
+    display: block;
+    margin: 10px 0;
+    text-decoration: underline;
+    color: green;
+}
+
+#photo-section,
+#about-me,
+#fun-facts,
+#projects,
+#resume {
+    margin-bottom: 40px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+   
+}
+
+#about-me,
+#fun-facts,
+#projects,
+#resume {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu {
+    background-color: #bbb9b9;
+    color: white;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .menu a {
+    margin: 0 20px;
+    color: black;
+    text-decoration: none;
+  }
+  
+.blog-post-content {
+    margin: 20px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    color: #333;
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  ul, ol {
+    margin-left: 1em;
+  }
+  
+  code {
+    background-color: #f1f1f1;
+    padding: 2px 4px;
+  }
+  
+  
