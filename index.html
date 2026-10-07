@@ -1,70 +1,307 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
-        <title>Olutuyo Mayowa</title>
+        <title>Olutuyo Mayowa - Developer, technical writer, community builder</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Olutuyo Mayowa works on strategy and applied AI at AI In Nigeria. Since 2020 he has built products, written the content that explains them, and grown the communities around them.">
+        <link rel="icon" href="favicon.svg" type="image/svg+xml">
+        <link rel="preload" href="fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="home.css">
+        <script>document.documentElement.classList.add('js');</script>
+    </head>
+    <body>
+        <!--
+        THESIS: The home page is a 3-in-1 set. One box of 19 bricks rebuilds into three models, one per thing Mayowa does: build, write, gather people. It refuses the portfolio stack of avatar hero, skill badges and a grid of project cards.
+        OWN-WORLD: The blog's brick world, unchanged: sky-blue page, thin black keylines, heavy Rubik glyphs, isometric studded bricks in blue, red, green and yellow on a gray baseplate, white call-outs marked "1x".
+        STORY: A recruiter learns what Mayowa does now, scans his work history, sees the proof for each build (projects, articles, community numbers), and emails him.
+        FIRST VIEWPORT: Photo, headline, lede and "Email me" on the left; the 19-brick model in the middle; the three builds on the right, each a button that rebuilds the model.
+        FORM: 3-in-1 alternate builds, fifth of seven structures. Seed 18ce7ad4.
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+        -->
+        <a class="skip" href="#work">Skip to my work history</a>
 
-</head>
-<body>
-    <div class ="container">
-        <div class = "menu">
-            <a href = "index.html">Home 🏠</a>
-            <a href = "blog.html">Blog 📰</a>
-    </div>
-    <div id ="intro">
-        <div id ="photo-section">
-            <img id="my-photo" src ="https://avatars.githubusercontent.com/Oluwamayowa247" alt="Mayowa's Photo">
-        </div>
-        <div id = "about-me">
-            <h1>About Me </h1>
-            <p> A mobile Applicaton Developer, Technical Writer and Community Manager with 2+ years experience spanning across these fields.<br>
-                 Building the next unicorn 🦄, passionate about learning and teaching the tech ways of making life better.<br>       
-            </p>
-            <i class="far fa-envelope"></i> <a href="mailto:mayowaolutuyo@gmail.com">mayowaolutuyo@gmail.com</a>   
+        <header class="top page">
+            <a class="top__id" href="index.html">
+                <svg class="tile" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6"/><circle cx="10.5" cy="10.5" r="4.5"/><circle cx="21.5" cy="10.5" r="4.5"/><circle cx="10.5" cy="21.5" r="4.5"/><circle cx="21.5" cy="21.5" r="4.5"/></svg>
+                <span>Olutuyo Mayowa</span>
+            </a>
+            <nav class="top__nav" aria-label="Site">
+                <a href="index.html" aria-current="page"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5 10 3l7 6.5V17h-4.5v-4.5h-5V17H3z"/></svg>Home</a>
+                <a href="blog.html"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5.5C8.5 4.3 6.3 3.8 2.5 4v11.5c3.8-.2 6 .3 7.5 1.5 1.5-1.2 3.7-1.7 7.5-1.5V4c-3.8-.2-6 .3-7.5 1.5zM10 5.5V17"/></svg>Blog</a>
+            </nav>
+        </header>
 
-            <a href="https://twitter.com/MayowaOlutuyo"> <i class="fab fa-twitter"></i></a>
-            <a href="https://www.linkedin.com/in/olutuyo-mayowa-a044951aa/"><i class ="fab fa-linkedin"></i></a>
-            <a href="https://github.com/Oluwamayowa247"><i class ="fab fa-github"></i></a>
-            
-        </div>
-    </div>
-    <div id = "fun-facts">
-        <h1>Fun Facts</h1>
-        <div class="fact" >
-            ⚽ I love watching football even though i can't play to save my life 😂,<br> i even coached my department's team in Uni.
-        </div>
-        <div class="fact" >
-            🎧 i don't enjoy writing code without listening to music, just getting lost in the sound while figuring the next unicorn.
-        </div>
-        <div class="fact" >
-            💪 my biggest strength is my social skills, i can talk to anyone about anything,<br> i'm a people person.
-        </div>
+        <main>
+            <div class="cover-wrap">
+                <div class="cover page">
+                    <div class="cover__text">
+                        <img class="cover__face" src="https://avatars.githubusercontent.com/Oluwamayowa247?s=176" alt="Olutuyo Mayowa" width="88" height="88">
+                        <h1>I'm Mayowa. <span>One box, three builds.</span></h1>
+                        <p class="cover__lede">Senior Officer, Strategy and Applied AI, at AI In Nigeria. Since 2020 I've built products, written the content that explains them, and grown the communities around them. Still building the next unicorn 🦄.</p>
+                        <p class="cover__actions">
+                            <a class="btn btn--primary" href="mailto:mayowaolutuyo@gmail.com">Email me</a>
+                            <a class="btn" href="blog.html">Read the blog<svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                        </p>
+                    </div>
 
+                    <div class="cover__stage">
+                        <figure class="cover__model" aria-hidden="true">
+                            <svg id="model" class="model model--build" viewBox="-183.1 -203.7 367 426" width="367" height="426"></svg>
+                        </figure>
+                        <p class="cover__note js-note" role="status">Build A is a phone. I build the apps, and these days the automations too.</p>
+                    </div>
 
-    </div>
+                    <section class="box" aria-labelledby="box-title">
+                        <h2 class="box__title" id="box-title">Three builds, 19 bricks</h2>
+                        <ul class="parts">
+                            <li><button type="button" class="partbtn partbtn--build" data-build="phone" data-note="Build A is a phone. I build the apps, and these days the automations too." aria-pressed="true"><span class="partbtn__qty"><span class="vh">Build </span>A</span><span class="partbtn__name">Developer</span></button></li>
+                            <li><button type="button" class="partbtn partbtn--build" data-build="typewriter" data-note="Build B is a typewriter with a fresh page in. I write the tech down so it makes sense." aria-pressed="false"><span class="partbtn__qty"><span class="vh">Build </span>B</span><span class="partbtn__name">Technical writer</span></button></li>
+                            <li><button type="button" class="partbtn partbtn--build" data-build="crowd" data-note="Build C is a small crowd and a soapbox. I can talk to anyone about anything." aria-pressed="false"><span class="partbtn__qty"><span class="vh">Build </span>C</span><span class="partbtn__name">Community builder</span></button></li>
+                        </ul>
+                        <p class="box__hint">Pick a build. It's the same 19 bricks every time.</p>
+                    </section>
+                </div>
+            </div>
 
-    <!-- <div id = "projects" class="facts">
-        <a href="https://drive.google.com/file/d/1hH-Ta2muL7Mwsuf8Ol2WLBlmgPpSfENq/view?usp=sharing">📌 You can check out my Resume to know more about me</a>
-    </div> -->
-    
-    
-    <div id="projects">
-        <h1>Projects</h1>
-        <a href="https://mayourwa.surge.sh/#/"> <img src = 'images/pok.png' alt = 'pokedex', width="200"><br> Pokedex</a>
-        <p>Pokedex is an archive application for anime characters mirroring the 2007 anime cartoon Bakugan<br>
-            it shows a list of this anime characters and when a character is clicked on you see the abilities and strength of the character</p>
-       
-    </div>
-    
-</body>
-<script>
-    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-  </script>
-  <script defer src="/_vercel/insights/script.js"></script>
+            <section class="spread" id="work" aria-labelledby="work-title">
+                <div class="page">
+                    <header class="spread__head spread__head--plain">
+                        <div class="spread__intro">
+                            <h2 id="work-title">Where I've worked</h2>
+                            <p>Since 2020, newest first. The letters are the builds each job needed.</p>
+                        </div>
+                    </header>
 
+                    <ol class="steps steps--open steps--plain">
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">2026</p></div>
+                            <div class="step__body">
+                                <h3 class="step__title">Senior Officer, Strategy and Applied AI</h3>
+                                <p class="step__org">AI In Nigeria</p>
+                                <p class="step__hook">I drive adoption of AI across our products and client services. That means writing the product and technical documentation so engineers and everyone else can follow it, and designing and running AI training programs and workshops for clients.</p>
+                                <p class="step__meta"><span>April 2026 to now</span><span class="uses">Builds <b>B</b><b>C</b></span></p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">2025</p></div>
+                            <div class="step__body">
+                                <h3 class="step__title">Sales Manager</h3>
+                                <p class="step__org">Lendsqr</p>
+                                <p class="step__hook">I led product demos of Lendsqr's Lending-as-a-Service platform for financial institutions across Africa and beyond, turned what lenders asked for into delivery roadmaps, and trained microfinance banks, fintechs and credit-led institutions on the platform. I also built automations to take the repetitive work out of sales.</p>
+                                <p class="step__meta"><span>June 2025 to May 2026</span><span class="uses">Builds <b>A</b><b>B</b><b>C</b></span></p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">2023</p></div>
+                            <div class="step__body">
+                                <h3 class="step__title">Product Marketing and Partnership Manager</h3>
+                                <p class="step__org">Autogon AI</p>
+                                <p class="step__hook">I launched two AI newsletters, "AI-magine that!" and "How-to by Autogon", and grew them past 1,000 subscribers. I signed partnerships with ML Africa, SheCode Africa and Nexascale, ran hackathons and model-build sprints that drew over 1,000 participants, and led product demos for Omniguard360, our flagship fraud solution.</p>
+                                <p class="step__meta"><span>November 2023 to June 2025</span><span class="uses">Builds <b>B</b><b>C</b></span></p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">2022</p></div>
+                            <div class="step__body">
+                                <h3 class="step__title">Mobile Application Developer, intern</h3>
+                                <p class="step__org">WhoScore? and Co.Lab</p>
+                                <p class="step__hook">At WhoScore? I implemented the mobile app's interface and the logic for its API calls, in Flutter.</p>
+                                <p class="step__meta"><span>October 2022 to January 2023</span><span class="uses">Build <b>A</b></span></p>
+                            </div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">2020</p></div>
+                            <div class="step__body">
+                                <h3 class="step__title">Technical Writer</h3>
+                                <p class="step__org">BigFix Integrated Technologies</p>
+                                <p class="step__hook">I wrote 30+ pieces of technical content on ERP systems for the blog and social media, planned and ran client training sessions, and worked with the product and management teams on improvements that cut customer support tickets.</p>
+                                <p class="step__meta"><span>January 2020 to November 2021</span><span class="uses">Build <b>B</b></span></p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
 
+            <section class="spread" aria-labelledby="build-a">
+                <div class="page">
+                    <header class="spread__head">
+                        <p class="spread__letter"><span class="vh">Build </span>A</p>
+                        <div class="spread__intro">
+                            <h2 id="build-a">The developer</h2>
+                            <p>I started with Android apps in Java, moved to Flutter, and interned as a mobile developer. Since then it's been sales automations at Lendsqr and a hackathon MVP in April 2026. Two of these four are live, so go ahead and poke them.</p>
+                        </div>
+                        <figure class="spread__fig" aria-hidden="true"><svg class="fig" data-build="phone"></svg></figure>
+                    </header>
+
+                    <article class="feature" data-topic="flutter">
+                        <a class="feature__shot" href="https://mayourwa.surge.sh/#/" tabindex="-1" aria-hidden="true"><img src="images/pok.png" alt="" width="1321" height="464" loading="lazy"></a>
+                        <div class="feature__body">
+                            <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">Built with </span>Flutter</p>
+                            <h3 class="feature__title">Pokedex</h3>
+                            <p class="feature__hook">A Pokédex built with Flutter. It lists the Pokémon, and when you tap one you get its type and its stats: hit points, attack, defense and speed.</p>
+                            <p class="feature__actions">
+                                <a class="btn btn--primary" href="https://mayourwa.surge.sh/#/">Open the live app<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                                <a class="btn" href="https://github.com/Oluwamayowa247/pokedex">See the code<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                            </p>
+                        </div>
+                    </article>
+
+                    <ul class="steps steps--open">
+                        <li class="step" data-topic="nextjs">
+                            <div class="step__head">
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">Built with </span>Next.js</p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://threadlink-ashen.vercel.app">Threadlink</a></h3>
+                                <p class="step__hook">My hackathon MVP for designers sourcing fabric. Search African textile suppliers, filter them by fabric, and open each supplier's profile.</p>
+                                <p class="step__meta"><span>April 2026</span><span class="step__go" aria-hidden="true">Open it live<svg class="arrow arrow--out" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                        <li class="step" data-topic="flutter">
+                            <div class="step__head">
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">Built with </span>Flutter</p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://github.com/Oluwamayowa247/whoscore">whoscore</a></h3>
+                                <p class="step__hook">A sport community chat app, from my internship at WhoScore?. I built the interface and wired up the API calls.</p>
+                                <p class="step__meta"><span>2022</span><span class="step__go" aria-hidden="true">See the code<svg class="arrow arrow--out" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                        <li class="step" data-topic="android">
+                            <div class="step__head">
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">Built with </span>Android &amp; Java</p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://github.com/Oluwamayowa247/ChatterBox">ChatterBox</a></h3>
+                                <p class="step__hook">An Android app in Java, aimed at making community communication easier. From the early days, sign-up screens and all.</p>
+                                <p class="step__meta"><span>2021</span><span class="step__go" aria-hidden="true">See the code<svg class="arrow arrow--out" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="spread" aria-labelledby="build-b">
+                <div class="page">
+                    <header class="spread__head">
+                        <p class="spread__letter"><span class="vh">Build </span>B</p>
+                        <div class="spread__intro">
+                            <h2 id="build-b">The technical writer</h2>
+                            <p>30+ pieces on ERP systems at BigFix, two AI newsletters with 1,000+ subscribers at Autogon AI, and the product and technical docs at AI In Nigeria. On my own blog there are <b class="js-total">14</b> articles, about <b class="js-minutes-total">35</b> minutes of reading. These are the newest three.</p>
+                        </div>
+                        <figure class="spread__fig" aria-hidden="true"><svg class="fig" data-build="typewriter"></svg></figure>
+                    </header>
+
+                    <ol class="steps">
+                        <li class="step js-post" data-topic="flutter">
+                            <div class="step__head">
+                                <p class="step__num"><span class="vh">Step </span><span class="js-num">14</span></p>
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/web-responsiveness-in-flutter-using-flutterbootstrap5">Web responsiveness in Flutter using flutter_bootstrap5</a></h3>
+                                <p class="step__hook">Achieving responsiveness across various device sizes is an integral part of building any product web or mobile, especially now that we are moving into the era of foldable phones (Foldables again ! 😩, I would rant in another article 😂). Today we wil…</p>
+                                <p class="step__meta"><time datetime="2023-09-24">24 Sep 2023</time><span class="js-minutes">4 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                        <li class="step js-post" data-topic="backend">
+                            <div class="step__head">
+                                <p class="step__num"><span class="vh">Step </span><span class="js-num">13</span></p>
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Backend</span></p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/password-encryption-using-nodejs">Password Encryption Using Node.js</a></h3>
+                                <p class="step__hook">Authentication 🗝️ is an integral part of building products (at least for the products that require it, not all products require authentication you know 😏). Software engineering over the years has grown giving us various options to keep applications…</p>
+                                <p class="step__meta"><time datetime="2023-03-19">19 Mar 2023</time><span class="js-minutes">5 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                        <li class="step js-post" data-topic="flutter">
+                            <div class="step__head">
+                                <p class="step__num"><span class="vh">Step </span><span class="js-num">12</span></p>
+                                <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                            </div>
+                            <div class="step__body">
+                                <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/lottie-animations-with-flutter">Lottie Animations with Flutter</a></h3>
+                                <p class="step__hook">That Cool Feel 😎... That's the power of animation in any application(mobile or web), it gives the application that relaxed and cool feel. It just involves the user in the transition that happens within the application, Animations can be very cool tr…</p>
+                                <p class="step__meta"><time datetime="2022-10-05">5 Oct 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                            </div>
+                        </li>
+                    </ol>
+
+                    <div class="spread__foot">
+                        <ul class="kit" aria-label="What the articles are about">
+                            <li class="part" data-topic="flutter"><svg class="brick" aria-hidden="true"></svg><span class="part__qty"><span class="js-count">8</span>x</span>Flutter</li>
+                            <li class="part" data-topic="devlife"><svg class="brick" aria-hidden="true"></svg><span class="part__qty"><span class="js-count">3</span>x</span>Dev life</li>
+                            <li class="part" data-topic="android"><svg class="brick" aria-hidden="true"></svg><span class="part__qty"><span class="js-count">2</span>x</span>Android &amp; Java</li>
+                            <li class="part" data-topic="backend"><svg class="brick" aria-hidden="true"></svg><span class="part__qty"><span class="js-count">1</span>x</span>Backend</li>
+                        </ul>
+                        <a class="btn btn--primary" href="blog.html"><span>See all <span class="js-total">14</span> steps</span><svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="spread" aria-labelledby="build-c">
+                <div class="page">
+                    <header class="spread__head">
+                        <p class="spread__letter"><span class="vh">Build </span>C</p>
+                        <div class="spread__intro spread__intro--loud">
+                            <h2 id="build-c">The community builder</h2>
+                            <p>My biggest strength is my social skills. I can talk to anyone about anything. I'm a people person. 💪</p>
+                        </div>
+                        <figure class="spread__fig" aria-hidden="true"><svg class="fig" data-build="crowd"></svg></figure>
+                    </header>
+
+                    <ul class="steps steps--open steps--plain steps--tally">
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">400+</p></div>
+                            <div class="step__body"><p class="step__hook">members across the communities I've led, driving the conversations, events and partnerships that put emerging tech like AR and VR in front of people in Nigeria.</p></div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">1,000+</p></div>
+                            <div class="step__body"><p class="step__hook">participants at the hackathons and model-build sprints I organised at Autogon AI, where I built an early-stage AI community.</p></div>
+                        </li>
+                        <li class="step">
+                            <div class="step__head"><p class="step__num step__num--sm">3</p></div>
+                            <div class="step__body"><p class="step__hook">partnerships I negotiated for Autogon AI, with ML Africa, SheCode Africa and Nexascale, to drive AI adoption in developer communities.</p></div>
+                        </li>
+                    </ul>
+
+                    <h3 class="facts__title">Two more fun facts</h3>
+                    <ul class="facts">
+                        <li>⚽ I love watching football even though I can't play to save my life 😂. I even coached my department's team in uni.</li>
+                        <li>🎧 I don't enjoy writing code without listening to music, just getting lost in the sound while figuring out the next unicorn. <a href="https://mayourwa.hashnode.dev/the-mozart-effect-programming-and-music">It became my first article.</a></li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="close">
+            <div class="close__grid page">
+                <svg class="close__num close__num--letter" viewBox="0 0 122 124" aria-hidden="true"><text x="4" y="114">D</text></svg>
+                <div class="close__text">
+                    <h2>Build D is yours.</h2>
+                    <p>Got a role, a project, or an idea that needs building (or explaining)? Tell me what should come out of the box next. I'm easy to reach.</p>
+                    <ul class="close__links">
+                        <li><a class="btn btn--primary" href="mailto:mayowaolutuyo@gmail.com">Email me</a></li>
+                        <li><a class="btn" href="https://www.linkedin.com/in/olutuyo-mayowa-a044951aa/">LinkedIn</a></li>
+                        <li><a class="btn" href="https://github.com/Oluwamayowa247">GitHub</a></li>
+                        <li><a class="btn" href="https://twitter.com/MayowaOlutuyo">Twitter</a></li>
+                    </ul>
+                </div>
+                <p class="close__by">
+                    <img src="https://avatars.githubusercontent.com/Oluwamayowa247?s=112" alt="" width="56" height="56" loading="lazy">
+                    <span><b>Olutuyo Mayowa</b>Strategy and applied AI at AI In Nigeria. Developer, technical writer, community builder. <a href="blog.html">Read the blog</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <script src="bricks.js" defer></script>
+        <script src="home.js" defer></script>
+        <script>
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
+    </body>
 </html>

@@ -1,130 +1,924 @@
+/* The brick world both pages share, plus the blog's steps. home.css adds the home page. */
+
+/* Rubik by Hubert and Fischer, SIL Open Font License 1.1. */
+@font-face {
+    font-family: 'Rubik';
+    src: url('fonts/rubik-latin.woff2') format('woff2');
+    font-weight: 400 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    --sky: #aee1ff;
+    --sky-pale: #e6f5ff;
+    --sky-deep: #86cbf3;
+    --ink: #111111;
+    --ink-soft: #1c4660;
+    --paper: #ffffff;
+    --plate: #dfe5ea;
+    --blue: #147bd1;
+    --blue-deep: #0f6cbd;
+    --red: #e53935;
+    --green: #3fa34d;
+    --yellow: #ffcd00;
+
+    --u: 8px;        /* one stud: gaps and sizes are multiples of it */
+    --line: 1.5px;   /* keyline */
+    --radius: 10px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+html {
+    scroll-padding-top: calc(var(--u) * 3);
+    -webkit-text-size-adjust: 100%;
+}
 
 body {
-    font-family: 'Inter', sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+    margin: 0;
+    padding-bottom: calc(var(--u) * 1.5);
+    background: var(--sky);
+    color: var(--ink);
+    font: 400 1.0625rem/1.5 'Rubik', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-    color: #333;
+::selection {
+    background: var(--yellow);
+    color: var(--ink);
 }
 
-#my-photo {
-    border-radius: 50%;
-    margin-top: 20px;
-    margin-right: 20px;
-    width: 100px;
+:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
+.page {
+    width: min(100% - 2 * clamp(16px, 4vw, 32px), 1152px);
+    margin-inline: auto;
+}
+
+.vh {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+.skip {
+    position: absolute;
+    left: calc(var(--u) * 2);
+    top: calc(var(--u) * -10);
+    z-index: 10;
+    padding: var(--u) calc(var(--u) * 2);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.skip:focus {
+    top: calc(var(--u) * 2);
+}
+
+/* Part colors. Anything inside a [data-topic] draws its brick in that color. */
+[data-topic='flutter'] { --b: var(--blue); }
+[data-topic='devlife'] { --b: var(--red); }
+[data-topic='android'] { --b: var(--green); }
+[data-topic='backend'] { --b: var(--yellow); }
+
+/* ---------- Bricks (drawn by blog.js) ---------- */
+
+.bk path,
+.pl path,
+.guide path {
+    stroke: var(--ink);
+    stroke-width: var(--line);
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.f-top { fill: var(--b); }
+.f-left { fill: color-mix(in oklab, var(--b) 86%, black); }
+.f-right { fill: color-mix(in oklab, var(--b) 70%, black); }
+
+.pl { --b: var(--plate); }
+.pl .pl-stud { stroke: #7f95a4; }
+
+/* Bricks from earlier steps. */
+.bk--ghost { --b: #eef2f5; }
+.bk--ghost path { stroke: #5e7889; }
+
+.guide .seat {
+    fill: none;
+    stroke-dasharray: 3 3;
+}
+
+.guide .shaft { fill: none; stroke-width: 2.5px; }
+.guide .head { fill: var(--ink); }
+
+.brick {
+    display: block;
+    width: 44px;
     height: auto;
 }
 
-#intro {
+.arrow {
+    width: 20px;
+    height: 12px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: translate 0.25s var(--ease);
+}
+
+.arrow--down { rotate: 90deg; }
+.arrow--out { rotate: -45deg; }
+
+/* ---------- Top bar ---------- */
+
+.top {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 2);
+    padding-block: calc(var(--u) * 2);
 }
 
-#about-me {
-    margin-top: 20px;
-}
-
-#about-me h1 {
-    font-size: 24px;
-}
-
-#about-me p {
-    font-size: 18px;
-}
-
-.fact {
-    width: auto; 
-    padding: 10px 20px; 
-    border: 1px solid rgb(183, 183, 183);
-    text-align: center;
-    display: inline-block; 
-    margin: 10px;  
-    border-radius: 8px;
+.top__id {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--u) * 1.5);
+    min-height: 44px;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
     text-decoration: none;
-    color: inherit;
 }
-  
 
-.fact:hover {
-    background-color: rgba(172, 164, 150, 0.979);
+.tile {
+    width: 32px;
+    height: 32px;
+    flex: none;
+}
+
+.tile rect { fill: var(--blue); }
+.tile circle { fill: color-mix(in oklab, var(--blue) 86%, black); }
+
+.tile rect,
+.tile circle {
+    stroke: var(--ink);
+    stroke-width: 1.5;
+}
+
+/* The gap shows the ink behind it, which draws the dividing keylines. */
+.top__nav,
+.seg {
+    display: flex;
+    gap: var(--line);
+    overflow: hidden;
+    border: var(--line) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--ink);
+}
+
+/* On a narrow phone the name wraps; the links are never squeezed or cut off. */
+.top__nav {
+    flex: none;
+}
+
+.top__nav a,
+.seg__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--u);
+    min-height: 44px;
+    padding: 0 calc(var(--u) * 2);
+    border: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.top__nav a:hover,
+.seg__btn:hover {
+    background: var(--sky-pale);
+}
+
+.top__nav a:focus-visible,
+.seg__btn:focus-visible,
+.partbtn:focus-visible {
+    outline-offset: -4px;
+}
+
+.top__nav a[aria-current] {
+    background: var(--blue-deep);
+    color: #fff;
+}
+
+.top__nav a[aria-current]:focus-visible {
+    outline-color: #fff;
+}
+
+.seg__btn[aria-pressed='true'] {
+    background: var(--yellow);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ---------- Cover ---------- */
+
+.cover-wrap {
+    border-bottom: var(--line) solid var(--ink);
+    background: radial-gradient(circle, var(--sky-deep) 1.25px, transparent 1.75px) center top / 24px 24px;
+}
+
+.cover {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.85fr);
+    align-items: center;
+    gap: calc(var(--u) * 5);
+    padding-block: calc(var(--u) * 4) calc(var(--u) * 7);
+}
+
+.cover h1 {
+    margin: 0 0 calc(var(--u) * 3);
+    font-size: clamp(3rem, 0.5rem + 5.4vw, 5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+}
+
+.cover h1 span {
+    display: block;
+    margin-top: 0.3em;
+    font-size: max(1.375rem, 0.44em);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+}
+
+.cover__lede {
+    max-width: 34rem;
+    margin: 0 0 calc(var(--u) * 4);
+    font-size: 1.1875rem;
+}
+
+.cover__lede b {
     font-weight: 700;
 }
 
-#projects a {
-    display: block;
-    margin: 10px 0;
-    text-decoration: none;
-    color: rgb(255, 153, 36);
+.cover__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--u) * 1.5);
 }
 
-#resume a {
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--u) * 1.25);
+    min-height: 48px;
+    padding: 0 calc(var(--u) * 2.5);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.15s, translate 0.2s var(--ease);
+}
+
+.btn:hover { background: var(--sky-pale); }
+.btn:active { translate: 0 1px; }
+
+.btn--primary {
+    background: var(--blue-deep);
+    color: #fff;
+}
+
+.btn--primary:hover { background: #0b5799; }
+
+.btn:hover .arrow { translate: 3px 0; }
+.btn:hover .arrow--down { translate: 0 3px; }
+.btn:hover .arrow--out { translate: 2px -2px; }
+
+.cover__model {
+    margin: 0;
+}
+
+.model {
+    --line: 2px;
     display: block;
-    margin: 10px 0;
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    margin-inline: auto;
+    overflow: visible;
+}
+
+/* The parts inventory. */
+.box {
+    overflow: hidden;
+    border: var(--line) solid var(--ink);
+    border-radius: 14px;
+    background: var(--paper);
+}
+
+.box__title {
+    margin: 0;
+    padding: calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 1.5);
+    font-size: 0.8125rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.parts {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.parts li {
+    border-top: var(--line) solid var(--ink);
+}
+
+.partbtn {
+    display: grid;
+    grid-template-columns: 44px 2.75rem minmax(0, 1fr);
+    align-items: center;
+    gap: calc(var(--u) * 1.5);
+    width: 100%;
+    min-height: 64px;
+    padding: var(--u) calc(var(--u) * 2);
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.partbtn:hover { background: var(--sky-pale); }
+
+.partbtn__qty {
+    font-size: 1.375rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+.partbtn__name {
+    font-weight: 500;
+}
+
+.partbtn[aria-pressed='true'] {
+    background: var(--yellow);
+}
+
+.box__hint {
+    margin: 0;
+    padding: calc(var(--u) * 1.5) calc(var(--u) * 2);
+    border-top: var(--line) solid var(--ink);
+    color: var(--ink-soft);
+    font-size: 0.875rem;
+}
+
+/* ---------- Steps ---------- */
+
+.build {
+    padding-block: calc(var(--u) * 6) calc(var(--u) * 10);
+}
+
+.build__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--u) * 2);
+    margin-bottom: calc(var(--u) * 3);
+}
+
+.build__title {
+    margin: 0 auto 0 0;
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+.build__title:focus {
+    outline: none;
+}
+
+.linkbtn {
+    min-height: 44px;
+    padding: 0 var(--u);
+    border: 0;
+    background: none;
+    color: var(--ink);
+    font: inherit;
+    font-weight: 600;
     text-decoration: underline;
-    color: green;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    cursor: pointer;
 }
 
-#photo-section,
-#about-me,
-#fun-facts,
-#projects,
-#resume {
-    margin-bottom: 40px;
+.steps {
+    margin: 0 calc(var(--u) * -2);
+    padding: 0;
+    border-bottom: var(--line) solid var(--ink);
+    list-style: none;
 }
 
-.container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-   
+.step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 11rem minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: calc(var(--u) * 4);
+    padding: calc(var(--u) * 4) calc(var(--u) * 2);
+    border-top: var(--line) solid var(--ink);
+    transition: background-color 0.2s;
 }
 
-#about-me,
-#fun-facts,
-#projects,
-#resume {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.step:hover {
+    background: rgb(255 255 255 / 0.5);
 }
 
-.menu {
-    background-color: #bbb9b9;
-    color: white;
-    padding: 15px;
-    text-align: center;
-  }
-  
-  .menu a {
-    margin: 0 20px;
-    color: black;
+.step__head {
+    display: grid;
+    justify-items: start;
+    gap: calc(var(--u) * 2.5);
+}
+
+.step__num {
+    margin: 0;
+    font-size: 6rem;
+    font-weight: 900;
+    line-height: 0.76;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+}
+
+.step__title {
+    margin: 0 0 var(--u);
+    font-size: 1.625rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+}
+
+.step__title a {
+    color: inherit;
     text-decoration: none;
-  }
-  
-.blog-post-content {
-    margin: 20px;
-    font-size: 16px;
-    line-height: 1.6;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
 }
 
-h1, h2, h3 {
-    color: #333;
-  }
-  
-  a {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  ul, ol {
-    margin-left: 1em;
-  }
-  
-  code {
-    background-color: #f1f1f1;
-    padding: 2px 4px;
-  }
-  
-  
+/* The whole step is the link target. */
+.step__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+}
+
+.step__title a:focus-visible {
+    outline: none;
+}
+
+.step__title a:focus-visible::after {
+    outline: 3px solid var(--ink);
+    outline-offset: -3px;
+}
+
+.step:hover .step__title a {
+    text-decoration-line: underline;
+}
+
+.step__hook {
+    display: -webkit-box;
+    max-width: 62ch;
+    margin: 0 0 calc(var(--u) * 1.5);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.step__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--u) * 0.5) calc(var(--u) * 2.5);
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.step__newest {
+    display: none;
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.step__go {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--u);
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.step:hover .step__go .arrow {
+    translate: 4px 0;
+}
+
+.step__fig {
+    align-self: center;
+}
+
+/* The call-out for the part a step adds. */
+.part {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--u);
+    margin: 0;
+    padding: calc(var(--u) * 0.75) calc(var(--u) * 1.5) calc(var(--u) * 0.75) var(--u);
+    border: var(--line) solid var(--ink);
+    border-radius: var(--radius);
+    background: var(--paper);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.part .brick {
+    width: 30px;
+}
+
+.part__qty {
+    font-weight: 800;
+}
+
+.step__dgm {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+.step__dgm.is-seated .drop {
+    transform: translateY(var(--lift));
+}
+
+.step__dgm.is-seated .guide {
+    opacity: 0;
+}
+
+/* The newest step gets the full spread. */
+.step--lead {
+    grid-template-columns: minmax(0, 1fr) 16rem;
+    column-gap: calc(var(--u) * 6);
+    padding-block: calc(var(--u) * 5) calc(var(--u) * 6);
+}
+
+.step--lead .step__head {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--u) * 4);
+    margin-bottom: calc(var(--u) * 4);
+}
+
+.step--lead .step__num {
+    font-size: clamp(8rem, 4rem + 9vw, 11rem);
+}
+
+.step--lead .step__body {
+    grid-column: 1;
+}
+
+.step--lead .step__fig {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    --line: 2px;
+}
+
+.step--lead .step__title {
+    margin-bottom: calc(var(--u) * 1.5);
+    font-size: clamp(1.875rem, 1.2rem + 2.1vw, 2.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.step--lead .step__hook {
+    margin-bottom: calc(var(--u) * 2.5);
+    font-size: 1.1875rem;
+    -webkit-line-clamp: 3;
+}
+
+.step--lead .step__newest {
+    display: inline;
+}
+
+/* ---------- Close ---------- */
+
+.close {
+    border-top: var(--line) solid var(--ink);
+    background: radial-gradient(circle, var(--sky-deep) 1.25px, transparent 1.75px) center top / 24px 24px;
+    padding-block: calc(var(--u) * 9) calc(var(--u) * 11);
+}
+
+.close__grid {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: calc(var(--u) * 4) calc(var(--u) * 7);
+}
+
+.close__num {
+    display: block;
+    width: clamp(9rem, 22vw, 16rem);
+    height: auto;
+    overflow: visible;
+}
+
+/* Outlined and dashed: the step that isn't built yet. */
+.close__num text {
+    fill: var(--sky);
+    stroke: var(--ink);
+    stroke-width: 5;
+    stroke-dasharray: 9 7;
+    stroke-linejoin: round;
+    paint-order: stroke fill;
+    font-family: 'Rubik', system-ui, sans-serif;
+    font-size: 150px;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+
+.close h2 {
+    margin: 0 0 calc(var(--u) * 2);
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.close__text p {
+    max-width: 36rem;
+    margin: 0 0 calc(var(--u) * 3.5);
+    font-size: 1.1875rem;
+}
+
+.close__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--u) * 1.5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.close__by {
+    display: flex;
+    grid-column: 1 / -1;
+    align-items: center;
+    gap: calc(var(--u) * 2);
+    margin: calc(var(--u) * 3) 0 0;
+    padding-top: calc(var(--u) * 3);
+    border-top: var(--line) solid var(--ink);
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+}
+
+.close__by img {
+    flex: none;
+    border: var(--line) solid var(--ink);
+    border-radius: var(--radius);
+}
+
+.close__by b {
+    display: block;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    font-weight: 700;
+}
+
+.close__by a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+/* ---------- Progress bar along the bottom of the page ---------- */
+
+.progress {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 5;
+    display: flex;
+    gap: var(--line);
+    padding-top: var(--line);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--ink);
+}
+
+.progress span {
+    flex: 1;
+    height: var(--u);
+    background: var(--plate);
+    transition: background-color 0.3s;
+}
+
+.progress span.is-done {
+    background: var(--b);
+}
+
+/* ---------- Without JavaScript the list still reads; the drawings need it ---------- */
+
+html:not(.js) .cover__model,
+html:not(.js) .brick,
+html:not(.js) .step__dgm,
+html:not(.js) .box__hint,
+html:not(.js) .seg,
+html:not(.js) .progress {
+    display: none;
+}
+
+html:not(.js) .cover {
+    grid-template-columns: minmax(0, 11fr) minmax(0, 7fr);
+}
+
+html:not(.js) .partbtn {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    cursor: default;
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* The model assembles once, in the order the posts were written. */
+    .model--build .bk {
+        animation: drop-in 0.55s var(--ease) both;
+        animation-delay: calc(var(--i) * 75ms + 200ms);
+    }
+
+    .step__dgm .drop {
+        transition: transform 0.7s var(--ease);
+    }
+
+    .step__dgm .guide {
+        transition: opacity 0.25s;
+    }
+}
+
+@keyframes drop-in {
+    from {
+        opacity: 0;
+        transform: translateY(-56px);
+    }
+}
+
+/* ---------- Narrower screens ---------- */
+
+@media (max-width: 1099px) {
+    .cover {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: calc(var(--u) * 5) calc(var(--u) * 4);
+    }
+
+    .cover__text {
+        grid-column: 1 / -1;
+    }
+
+    .model {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 719px) {
+    .top__nav .icon {
+        display: none;
+    }
+
+    .cover {
+        grid-template-columns: minmax(0, 1fr);
+        padding-block: calc(var(--u) * 3) calc(var(--u) * 6);
+    }
+
+    .cover__lede {
+        font-size: 1.0625rem;
+    }
+
+    .model {
+        max-width: 240px;
+    }
+
+    .build {
+        padding-block: calc(var(--u) * 5) calc(var(--u) * 8);
+    }
+
+    .step,
+    .step--lead {
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: calc(var(--u) * 2);
+        row-gap: calc(var(--u) * 2.5);
+        padding-block: calc(var(--u) * 3.5);
+    }
+
+    .step__head,
+    .step--lead .step__head {
+        display: grid;
+        gap: calc(var(--u) * 2);
+        margin: 0;
+    }
+
+    .step__num {
+        font-size: 4.5rem;
+    }
+
+    .step--lead .step__num {
+        font-size: 6.5rem;
+    }
+
+    .step__body,
+    .step--lead .step__body {
+        grid-column: 1 / -1;
+    }
+
+    .step__fig,
+    .step--lead .step__fig {
+        grid-column: 2;
+        grid-row: 1;
+        align-self: end;
+    }
+
+    .step__dgm {
+        width: 5.25rem;
+    }
+
+    .step--lead .step__dgm {
+        width: 7rem;
+    }
+
+    .step__title {
+        font-size: 1.375rem;
+    }
+
+    .step__hook {
+        -webkit-line-clamp: 3;
+    }
+
+    .close {
+        padding-block: calc(var(--u) * 7) calc(var(--u) * 9);
+    }
+
+    .close__grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .close__text p {
+        font-size: 1.0625rem;
+    }
+}

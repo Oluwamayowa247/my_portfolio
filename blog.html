@@ -1,63 +1,293 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>Olutuyo Mayowa - Blog</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Every article Olutuyo Mayowa has published on Flutter, Android, backend and life as a developer, laid out as numbered build steps.">
+        <link rel="preload" href="fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="icon" href="favicon.svg" type="image/svg+xml">
         <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+        <script>document.documentElement.classList.add('js');</script>
     </head>
     <body>
-       
-        <div class = "menu">
-            <a href = "index.html">Home 🏠</a>
-            <a href = "blog.html">Blog 📰</a>
-    </div>
-    <div class="container">
-        <h2>My Articles 📓</h1>
-    </div>
-    <div id="articles"></div>
-    <script>
-        const username = 'Mayourwa';
-        fetch('https://api.hashnode.com/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                query: `
-                query {
-                    user(username: "${username}") {
-                        publication {
-                            posts {
-                                title
-                                slug    
-                            }
-                        }
-                    }
-                }
-                `
-            })
-            })
-        .then(res => res.json()).then (res => {
-            const articles = res.data.user.publication.posts;
-            const articlesDiv = document.getElementById('articles');
-            articles.forEach(article => {
-                const articleDiv = document.createElement('div');
-                articleDiv.innerHTML = `
-                <a id="projects" class="fact" href="https://mayourwa.hashnode.dev/${article.slug}">
-                    <h2>${article.title}</h2>
-                </a>
-                `;
-                articlesDiv.appendChild(articleDiv);
-            });
-        });
-    </script>
+        <!--
+        THESIS: The blog is a brick build-instruction booklet. Each article is a numbered step that snaps one brick onto a model. It refuses the dev-blog grid of cover-image cards with tag pills.
+        OWN-WORLD: Sky-blue page, thin black keylines, heavy Rubik numerals, isometric studded bricks in four part colors (blue, red, green, yellow) on a gray baseplate, white parts call-outs marked "1x".
+        STORY: A recruiter sees what Mayowa builds with, meets the newest article first, opens it, and finds how to reach him.
+        FIRST VIEWPORT: Headline, lede and the "start at the newest step" button on the left; the finished 14-brick model in the middle; the parts inventory box on the right, each part a filter.
+        FORM: Brick build-instruction book, chosen by Mayowa from the dealt alternates. Seed 3fc94c21.
+        FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+        -->
+        <a class="skip" href="#steps">Skip to the steps</a>
+
+        <header class="top page">
+            <a class="top__id" href="index.html">
+                <svg class="tile" viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="6"/><circle cx="10.5" cy="10.5" r="4.5"/><circle cx="21.5" cy="10.5" r="4.5"/><circle cx="10.5" cy="21.5" r="4.5"/><circle cx="21.5" cy="21.5" r="4.5"/></svg>
+                <span>Olutuyo Mayowa</span>
+            </a>
+            <nav class="top__nav" aria-label="Site">
+                <a href="index.html"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5 10 3l7 6.5V17h-4.5v-4.5h-5V17H3z"/></svg>Home</a>
+                <a href="blog.html" aria-current="page"><svg class="icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 5.5C8.5 4.3 6.3 3.8 2.5 4v11.5c3.8-.2 6 .3 7.5 1.5 1.5-1.2 3.7-1.7 7.5-1.5V4c-3.8-.2-6 .3-7.5 1.5zM10 5.5V17"/></svg>Blog</a>
+            </nav>
+        </header>
+
+        <main>
+            <div class="cover-wrap">
+                <div class="cover page">
+                    <div class="cover__text">
+                        <h1>My articles. <span>Some assembly required.</span></h1>
+                        <p class="cover__lede"><b class="js-total">14</b> posts, about <b class="js-minutes-total">35</b> minutes of reading, written between <span class="js-range">December 2020 and September 2023</span>. Every post is a numbered step, and every step snaps one more brick onto the model.</p>
+                        <p class="cover__actions">
+                            <a class="btn btn--primary" href="#steps">Start at the newest step<svg class="arrow arrow--down" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                            <a class="btn" href="https://mayourwa.hashnode.dev">Open the blog on Hashnode<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
+                        </p>
+                    </div>
+
+                    <figure class="cover__model" aria-hidden="true">
+                        <svg id="model" class="model model--build"></svg>
+                    </figure>
+
+                    <section class="box" aria-labelledby="box-title">
+                        <h2 class="box__title" id="box-title">What's in the box</h2>
+                        <ul class="parts">
+                            <li><button type="button" class="partbtn" data-topic="flutter" aria-pressed="false"><svg class="brick" aria-hidden="true"></svg><span class="partbtn__qty"><span class="js-count">8</span>x</span><span class="partbtn__name">Flutter</span></button></li>
+                            <li><button type="button" class="partbtn" data-topic="devlife" aria-pressed="false"><svg class="brick" aria-hidden="true"></svg><span class="partbtn__qty"><span class="js-count">3</span>x</span><span class="partbtn__name">Dev life</span></button></li>
+                            <li><button type="button" class="partbtn" data-topic="android" aria-pressed="false"><svg class="brick" aria-hidden="true"></svg><span class="partbtn__qty"><span class="js-count">2</span>x</span><span class="partbtn__name">Android &amp; Java</span></button></li>
+                            <li><button type="button" class="partbtn" data-topic="backend" aria-pressed="false"><svg class="brick" aria-hidden="true"></svg><span class="partbtn__qty"><span class="js-count">1</span>x</span><span class="partbtn__name">Backend</span></button></li>
+                        </ul>
+                        <p class="box__hint">Pick a part to see only its steps.</p>
+                    </section>
+                </div>
+            </div>
+
+            <section class="build page" id="steps" aria-labelledby="steps-title">
+                <div class="build__bar">
+                    <h2 class="build__title" id="steps-title" tabindex="-1">All 14 steps</h2>
+                    <button type="button" class="linkbtn js-show-all" hidden>Show all 14</button>
+                    <div class="seg" role="group" aria-label="Step order">
+                        <button type="button" class="seg__btn" data-order="newest" aria-pressed="true">Newest first</button>
+                        <button type="button" class="seg__btn" data-order="oldest" aria-pressed="false">From step 1</button>
+                    </div>
+                </div>
+                <p class="vh js-status" role="status"></p>
+
+                <ol class="steps">
+                <li class="step step--lead" id="step-14" data-topic="flutter" data-date="2023-09-24T19:50:40.000Z" data-minutes="4">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">14</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/web-responsiveness-in-flutter-using-flutterbootstrap5">Web responsiveness in Flutter using flutter_bootstrap5</a></h3>
+                        <p class="step__hook">Achieving responsiveness across various device sizes is an integral part of building any product web or mobile, especially now that we are moving into the era of foldable phones (Foldables again ! 😩, I would rant in another article 😂). Today we wil…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2023-09-24">24 Sep 2023</time><span class="js-minutes">4 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-13" data-topic="backend" data-date="2023-03-19T02:49:02.000Z" data-minutes="5">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">13</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Backend</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/password-encryption-using-nodejs">Password Encryption Using Node.js</a></h3>
+                        <p class="step__hook">Authentication 🗝️ is an integral part of building products (at least for the products that require it, not all products require authentication you know 😏). Software engineering over the years has grown giving us various options to keep applications…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2023-03-19">19 Mar 2023</time><span class="js-minutes">5 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-12" data-topic="flutter" data-date="2022-10-05T13:26:18.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">12</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/lottie-animations-with-flutter">Lottie Animations with Flutter</a></h3>
+                        <p class="step__hook">That Cool Feel 😎... That's the power of animation in any application(mobile or web), it gives the application that relaxed and cool feel. It just involves the user in the transition that happens within the application, Animations can be very cool tr…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-10-05">5 Oct 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-11" data-topic="flutter" data-date="2022-06-04T11:57:34.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">11</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/inkwell-vs-gesture-detector-their-differences">InkWell Vs Gesture Detector: Their Differences</a></h3>
+                        <p class="step__hook">Gesture Detector and the Inkwell class are sometimes confused with each other. What differentiates an inkwell from a gesture detector 😕? let's try to demystify that. Leggo! 🚀 What is a gesture detector 😕? According to flutter's official documenta…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-06-04">4 Jun 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-10" data-topic="flutter" data-date="2022-05-11T17:08:34.000Z" data-minutes="6">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">10</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/how-to-make-a-simple-video-calling-app-with-flutter-and-agora">How to make a simple video calling app with Flutter and Agora</a></h3>
+                        <p class="step__hook">Video-call is one of the wonders of technology. I mean seeing the person one is talking to in real-time is just mind-blowing 🤯. Sometimes I feel like programming is a form of magic because the way this could have been possible would have …</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-05-11">11 May 2022</time><span class="js-minutes">6 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-9" data-topic="flutter" data-date="2022-04-30T16:52:22.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">9</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/replicating-designs-an-effective-way-to-learn-flutter">Replicating Designs: An Effective Way to Learn Flutter</a></h3>
+                        <p class="step__hook">Learning a programming language can be very daunting, especially when there is no clear cut plan on how one intends to learn the language to attain mastery. I mean can one master a language 😏? Figuring out how best a language can be learnt saves y…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-04-30">30 Apr 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-8" data-topic="flutter" data-date="2022-04-20T16:14:46.000Z" data-minutes="1">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">8</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/too-many-import-statements-try-barrel-file">Too Many Import Statements? Try Barrel File</a></h3>
+                        <p class="step__hook">If you are used to watching cowboy movies 🤠, then barrels shouldn't be new to you first off you see the men with nice-looking hats then ranches with beautiful horses and most importantly barrels filled with liquors. But am not talking movies, today …</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-04-20">20 Apr 2022</time><span class="js-minutes">1 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-7" data-topic="flutter" data-date="2022-04-07T13:11:45.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">7</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/flutter-alignment-ii-main-axis-alignment-vs-cross-axis-alignment">Flutter Alignment II: Main Axis Alignment VS Cross-Axis Alignment</a></h3>
+                        <p class="step__hook">In my last article, I tried to explain the main-axis alignment property I hope you found it helpful. In this sequel, I would be explaining the cross-axis alignment property, But first off, do you notice that the cover image for this article is a glob…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-04-07">7 Apr 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-6" data-topic="flutter" data-date="2022-04-06T12:06:40.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">6</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Flutter</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/flutter-alignment-main-axis-alignment-vs-crossaxis-alignment">Flutter Alignment: Main Axis Alignment VS CrossAxis Alignment</a></h3>
+                        <p class="step__hook">Alignment in flutter can be confusing sometimes, this minute it seems like you are understanding it the next minute it seems hard. So in this article, I would try to explain the difference between the main-axis alignment and cross-axis alignment prop…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2022-04-06">6 Apr 2022</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-5" data-topic="devlife" data-date="2021-10-16T09:57:12.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">5</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Dev life</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/are-apps-actually-over-engineered-my-opinion">Are Apps actually over-engineered? My Opinion...</a></h3>
+                        <p class="step__hook">Which would you prefer, the first or the second frame? As a user what is your appeal towards an app, functionality or graphics? As a developer in a bid to satisfy user appeal or let me say flex our programming muscles do we tend to over-engineer an a…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2021-10-16">16 Oct 2021</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-4" data-topic="devlife" data-date="2021-10-09T09:50:38.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">4</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Dev life</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/code-schooling-the-diary-of-a-student-developer">Code-Schooling: The Diary Of A Student Developer...</a></h3>
+                        <p class="step__hook">Starting as a programmer can be really overwhelming, this minute you want to learn A the next minute you want to learn B, I mean you just want to grasp all those exciting concepts at a glance(I wish that was possible though). And then Boom! you sudde…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2021-10-09">9 Oct 2021</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-3" data-topic="android" data-date="2021-01-18T22:41:15.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">3</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Android &amp; Java</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/tic-tac-toe-my-first-running-app-part-2">Tic Tac Toe: My First Running App (Part 2)</a></h3>
+                        <p class="step__hook">Continuing from where we left off in my last article Tic Tac Toe: My First Running App (Part 1) you can check it out here Tic Tac Toe: My First Running App (Part 1) we stopped at the creation of a boolean Method called checkForWin this method detects…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2021-01-18">18 Jan 2021</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-2" data-topic="android" data-date="2021-01-06T17:00:08.000Z" data-minutes="2">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">2</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Android &amp; Java</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/tic-tac-toe-my-first-running-app-part-1">Tic Tac Toe: My First Running App (Part 1)</a></h3>
+                        <p class="step__hook">Yes, I know not the best UI but it was my first completed android app, so am going to be flaunting myself a bit. I would run you through my app code, less I forget I had help from codinginflow you can check him out here coding in flow, he has great …</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2021-01-06">6 Jan 2021</time><span class="js-minutes">2 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                <li class="step" id="step-1" data-topic="devlife" data-date="2020-12-30T13:56:10.000Z" data-minutes="1">
+                    <div class="step__head">
+                        <p class="step__num"><span class="vh">Step </span><span class="js-num">1</span></p>
+                        <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic">Dev life</span></p>
+                    </div>
+                    <div class="step__body">
+                        <h3 class="step__title"><a href="https://mayourwa.hashnode.dev/the-mozart-effect-programming-and-music">The Mozart Effect: Programming and Music</a></h3>
+                        <p class="step__hook">Since I started coding I naturally gravitated towards music to help with concentration, but I noticed that virtually every programmer I know did this too, spending thousands on noise cancellation headphones and all, and it got me thinking what is thi…</p>
+                        <p class="step__meta"><span class="step__newest">Newest step</span><time datetime="2020-12-30">30 Dec 2020</time><span class="js-minutes">1 min read</span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                    </div>
+                    <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+                </li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="close">
+            <div class="close__grid page">
+                <svg class="close__num" viewBox="0 0 196 124" aria-hidden="true"><text class="js-next" x="2" y="114">15</text></svg>
+                <div class="close__text">
+                    <h2>Step <span class="js-next">15</span> is still in the box.</h2>
+                    <p>When I publish it, it shows up here on its own. Until then, if you want to talk about a role, a project, or what I should write next, I'm easy to reach.</p>
+                    <ul class="close__links">
+                        <li><a class="btn btn--primary" href="mailto:mayowaolutuyo@gmail.com">Email me</a></li>
+                        <li><a class="btn" href="https://www.linkedin.com/in/olutuyo-mayowa-a044951aa/">LinkedIn</a></li>
+                        <li><a class="btn" href="https://github.com/Oluwamayowa247">GitHub</a></li>
+                        <li><a class="btn" href="https://twitter.com/MayowaOlutuyo">Twitter</a></li>
+                    </ul>
+                </div>
+                <p class="close__by">
+                    <img src="https://avatars.githubusercontent.com/Oluwamayowa247?s=112" alt="" width="56" height="56" loading="lazy">
+                    <span><b>Olutuyo Mayowa</b>Strategy and applied AI at AI In Nigeria. Developer, technical writer, community builder. <a href="index.html">More about me</a></span>
+                </p>
+            </div>
+        </footer>
+
+        <div class="progress" aria-hidden="true"></div>
+
+        <!-- blog.js clones this for posts that arrive from the feed. -->
+        <template id="step-template">
+            <li class="step">
+                <div class="step__head">
+                    <p class="step__num"><span class="vh">Step </span><span class="js-num"></span></p>
+                    <p class="part"><svg class="brick" aria-hidden="true"></svg><span class="part__qty" aria-hidden="true">1x</span><span class="vh">New part: </span><span class="js-topic"></span></p>
+                </div>
+                <div class="step__body">
+                    <h3 class="step__title"><a href=""></a></h3>
+                    <p class="step__hook"></p>
+                    <p class="step__meta"><span class="step__newest">Newest step</span><time></time><span class="js-minutes"></span><span class="step__go" aria-hidden="true">Read<svg class="arrow" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
+                </div>
+                <div class="step__fig"><svg class="step__dgm" aria-hidden="true"></svg></div>
+            </li>
+        </template>
+
+        <script src="bricks.js" defer></script>
+        <script src="blog.js" defer></script>
+        <script>
+            window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        </script>
+        <script defer src="/_vercel/insights/script.js"></script>
     </body>
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-      </script>
-      <script defer src="/_vercel/insights/script.js"></script>
-    
-   
-    
 </html>
