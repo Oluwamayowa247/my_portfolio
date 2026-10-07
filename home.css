@@ -1,0 +1,410 @@
+/* Home page only. The brick world it shares with the blog is in style.css. */
+
+/* The blog leaves this room for its progress bar. */
+body {
+    padding-bottom: 0;
+}
+
+/* Brick colors for the 3-in-1 model. */
+[data-c='blue'] { --b: var(--blue); }
+[data-c='red'] { --b: var(--red); }
+[data-c='green'] { --b: var(--green); }
+[data-c='yellow'] { --b: var(--yellow); }
+[data-c='white'] { --b: var(--paper); }
+[data-c='white'] .f-left { fill: #e8eef3; }
+[data-c='white'] .f-right { fill: #ccd6dd; }
+
+[data-topic='nextjs'] { --b: var(--yellow); }
+
+/* ---------- Cover ---------- */
+
+.cover__face {
+    display: block;
+    width: 88px;
+    height: 88px;
+    margin-bottom: calc(var(--u) * 3);
+    border: var(--line) solid var(--ink);
+    border-radius: 14px;
+    background: var(--paper);
+    object-fit: cover;
+}
+
+/* Says what the model is, and changes with it. Two lines are held open so
+   the page doesn't shift when the text does. */
+.cover__note {
+    max-width: 21rem;
+    min-height: 3em;
+    margin: calc(var(--u) * 2) auto 0;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-align: center;
+    text-wrap: balance;
+}
+
+.partbtn--build {
+    grid-template-columns: 2rem minmax(0, 1fr);
+}
+
+/* ---------- The three builds ---------- */
+
+.spread + .spread {
+    border-top: var(--line) solid var(--ink);
+}
+
+.spread > .page {
+    padding-block: calc(var(--u) * 9) calc(var(--u) * 10);
+}
+
+.spread__head {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: calc(var(--u) * 3) calc(var(--u) * 6);
+    margin-bottom: calc(var(--u) * 6);
+}
+
+.spread__letter {
+    margin: 0;
+    font-size: clamp(8rem, 4rem + 9vw, 11rem);
+    font-weight: 900;
+    line-height: 0.76;
+    letter-spacing: -0.04em;
+}
+
+.spread__intro h2 {
+    margin: 0 0 calc(var(--u) * 2);
+    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+}
+
+.spread__intro p {
+    max-width: 36rem;
+    margin: 0;
+    font-size: 1.1875rem;
+}
+
+.spread__intro b {
+    font-weight: 700;
+}
+
+/* His own words carry this one, so they get the volume. */
+.spread__intro--loud p {
+    max-width: 30rem;
+    font-size: clamp(1.375rem, 1.05rem + 1.2vw, 1.875rem);
+    font-weight: 600;
+    line-height: 1.22;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+}
+
+.spread__fig {
+    margin: 0;
+}
+
+/* The work history has no letter and no model, only its heading. */
+.spread__head--plain {
+    display: block;
+}
+
+.spread__head--plain p {
+    max-width: 44rem;
+}
+
+/* Rows that aren't links: the jobs, and the community numbers. */
+.steps--plain .step:hover {
+    background: none;
+}
+
+/* Years and counts, where the blog has step numbers. */
+.step__num--sm {
+    font-size: 3.25rem;
+    line-height: 0.8;
+}
+
+.step__org {
+    margin: 0 0 var(--u);
+    font-weight: 600;
+}
+
+/* Which builds a job needed. */
+.uses {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--u) * 0.75);
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.uses b {
+    display: grid;
+    place-items: center;
+    width: 1.625rem;
+    height: 1.625rem;
+    border: var(--line) solid var(--ink);
+    border-radius: 6px;
+    background: var(--paper);
+    font-size: 0.8125rem;
+    font-weight: 800;
+}
+
+.steps--tally {
+    margin-bottom: calc(var(--u) * 7);
+}
+
+.steps--tally .step {
+    align-items: center;
+    padding-block: calc(var(--u) * 3);
+}
+
+.steps--tally .step__hook {
+    margin: 0;
+    font-size: 1.1875rem;
+}
+
+.fig {
+    display: block;
+    width: 11.5rem;
+    height: auto;
+    overflow: visible;
+}
+
+/* The lead project gets the full spread. */
+.feature {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: calc(var(--u) * 6);
+    margin: 0 calc(var(--u) * -2);
+    padding: calc(var(--u) * 5) calc(var(--u) * 2) calc(var(--u) * 6);
+    border-top: var(--line) solid var(--ink);
+}
+
+.feature__shot {
+    display: block;
+    overflow: hidden;
+    border: var(--line) solid var(--ink);
+    border-radius: 14px;
+    background: #ec4561;
+}
+
+/* The screenshot is mostly empty red, so it is cropped in on the middle. */
+.feature__shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    scale: 1.3;
+    transition: scale 0.6s var(--ease);
+}
+
+.feature__shot:hover img {
+    scale: 1.36;
+}
+
+.feature__title {
+    margin: calc(var(--u) * 2.5) 0 calc(var(--u) * 1.5);
+    font-size: clamp(1.875rem, 1.2rem + 2.1vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+}
+
+.feature__hook {
+    max-width: 34rem;
+    margin: 0 0 calc(var(--u) * 3.5);
+    font-size: 1.1875rem;
+}
+
+.feature__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--u) * 1.5);
+    margin: 0;
+}
+
+.step:hover .step__go .arrow--out {
+    translate: 2px -2px;
+}
+
+/* A project's one line is all there is to read about it, so it is never cut short. */
+.steps--open .step__hook {
+    display: block;
+}
+
+.spread__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--u) * 3);
+    margin-top: calc(var(--u) * 4);
+}
+
+.kit {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--u) calc(var(--u) * 1.5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.facts__title {
+    margin: 0 0 calc(var(--u) * 3);
+    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+/* The gap shows the ink behind it, which draws the keyline between the two. */
+.facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--line);
+    margin: 0 calc(var(--u) * -2);
+    padding: 0;
+    border-block: var(--line) solid var(--ink);
+    background: var(--ink);
+    list-style: none;
+}
+
+.facts li {
+    padding: calc(var(--u) * 4) calc(var(--u) * 2);
+    background: var(--sky);
+    font-size: 1.1875rem;
+}
+
+.facts li + li {
+    padding-left: calc(var(--u) * 4);
+}
+
+.facts a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+/* ---------- Close ---------- */
+
+/* One letter where the blog has two digits. */
+.close__num--letter {
+    width: clamp(5.75rem, 14vw, 10rem);
+}
+
+/* ---------- Without JavaScript the page still reads; the drawings need it ---------- */
+
+html:not(.js) .cover__stage,
+html:not(.js) .spread__fig {
+    display: none;
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+    /* Each build drops together the first time its section is reached. */
+    .fig--waiting .bk {
+        opacity: 0;
+    }
+
+    .fig--build .bk {
+        animation: drop-near 0.5s var(--ease) both;
+        animation-delay: calc(var(--i) * 40ms);
+    }
+}
+
+@keyframes drop-near {
+    from {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+}
+
+/* ---------- Narrower screens ---------- */
+
+@media (max-width: 1099px) {
+    .spread__head {
+        column-gap: calc(var(--u) * 4);
+    }
+
+    .feature {
+        gap: calc(var(--u) * 4);
+    }
+}
+
+@media (max-width: 719px) {
+    .cover__face {
+        width: 72px;
+        height: 72px;
+    }
+
+    .spread > .page {
+        padding-block: calc(var(--u) * 7) calc(var(--u) * 8);
+    }
+
+    .spread__head {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        margin-bottom: calc(var(--u) * 4);
+    }
+
+    .spread__letter {
+        font-size: 6.5rem;
+    }
+
+    .spread__intro {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .spread__intro p {
+        font-size: 1.0625rem;
+    }
+
+    .spread__intro--loud p {
+        font-size: 1.375rem;
+    }
+
+    .fig {
+        width: 7.5rem;
+    }
+
+    .feature {
+        grid-template-columns: minmax(0, 1fr);
+        gap: calc(var(--u) * 3);
+        padding-block: calc(var(--u) * 3.5) calc(var(--u) * 4.5);
+    }
+
+    .feature__hook,
+    .facts li,
+    .steps--tally .step__hook {
+        font-size: 1.0625rem;
+    }
+
+    .step__num--sm {
+        font-size: 2.75rem;
+    }
+
+    .steps--tally {
+        margin-bottom: calc(var(--u) * 5);
+    }
+
+    .steps--tally .step {
+        row-gap: calc(var(--u) * 1.5);
+    }
+
+    .facts {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .facts li,
+    .facts li + li {
+        padding: calc(var(--u) * 3) calc(var(--u) * 2);
+    }
+}
