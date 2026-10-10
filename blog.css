@@ -1,0 +1,11 @@
+/* Blog page only. The poster world it shares with the home page is in style.css. */
+
+/* How many ems wide each line of giant lettering is, and how far its first
+   letter sits in from the edge. Measured in Anton; change them with the words. */
+:root {
+    --fit: 3.32;                /* ARTICLES */
+    --nudge: -0.016em;
+    --fit-close: 11.32;         /* NUMBER 15 ISN'T WRITTEN YET. */
+    --fit-close-narrow: 5.18;   /* ISN'T WRITTEN */
+    --nudge-close: -0.031em;
+}

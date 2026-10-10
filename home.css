@@ -1,242 +1,470 @@
-/* Home page only. The brick world it shares with the blog is in style.css. */
+/* Home page only. The poster world it shares with the blog is in style.css. */
 
 /* The blog leaves this room for its progress bar. */
 body {
     padding-bottom: 0;
 }
 
-/* Brick colors for the 3-in-1 model. */
-[data-c='blue'] { --b: var(--blue); }
-[data-c='red'] { --b: var(--red); }
-[data-c='green'] { --b: var(--green); }
-[data-c='yellow'] { --b: var(--yellow); }
-[data-c='white'] { --b: var(--paper); }
-[data-c='white'] .f-left { fill: #e8eef3; }
-[data-c='white'] .f-right { fill: #ccd6dd; }
-
-[data-topic='nextjs'] { --b: var(--yellow); }
-
-/* ---------- Cover ---------- */
-
-.cover__face {
-    display: block;
-    width: 88px;
-    height: 88px;
-    margin-bottom: calc(var(--u) * 3);
-    border: var(--line) solid var(--ink);
-    border-radius: 14px;
-    background: var(--paper);
-    object-fit: cover;
+/* How many ems wide each line of giant lettering is, and how far its first
+   letter sits in from the edge. Measured in Anton; change them with the words. */
+:root {
+    --fit: 3.3;                /* MÁYỌ̀WÁ */
+    --nudge: -0.031em;
+    --mark-top: 0.27;          /* ems its tone marks stand above the capitals */
+    --mark-bottom: 0.22;       /* ems the dot under the O hangs below them */
+    --under-mark: var(--u);    /* the dot's room already parts the name from the words */
+    --tile-narrow-top: calc(var(--u) * 2);
+    --fit-close: 7.13;         /* I'M EASY TO REACH. */
+    --fit-close-narrow: 3.72;  /* TO REACH. */
+    --nudge-close: -0.031em;
 }
 
-/* Says what the model is, and changes with it. Two lines are held open so
-   the page doesn't shift when the text does. */
-.cover__note {
-    max-width: 21rem;
-    min-height: 3em;
-    margin: calc(var(--u) * 2) auto 0;
-    color: var(--ink-soft);
+/* One color for each of the four things he does, used wherever one is named. */
+[data-role='dev'] { --b: var(--coral); }
+[data-role='writing'] { --b: var(--cyan); }
+[data-role='sales'] { --b: var(--yellow); }
+[data-role='community'] { --b: var(--green); }
+
+/* His current job, beside the tile. */
+.hero__now {
+    margin: 0 0 calc(var(--u) * 3);
+    color: var(--fg);
+    font: 700 1.375rem/1.2 var(--text);
+    font-stretch: 78%;
+    text-wrap: balance;
+}
+
+/* ---------- The four roles, in a row under the opening poster ---------- */
+
+.roles {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: calc(var(--u) * 1.5);
+    margin: clamp(1.5rem, 2.6cqw, 2.25rem) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Every card in the row is as tall as the tallest. */
+.roles li {
+    display: grid;
+}
+
+.role {
+    display: flex;
+    flex-direction: column;
+    gap: var(--u);
+    padding: calc(var(--u) * 2) calc(var(--u) * 2.25) calc(var(--u) * 2.25);
+    border-radius: var(--radius-m);
+    text-decoration: none;
+    transition: translate 0.3s var(--ease);
+}
+
+.role__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--u);
+    margin-top: auto;
+    padding-top: var(--u);
+}
+
+.role:hover {
+    translate: 0 -3px;
+}
+
+.role:focus-visible {
+    outline-color: var(--fg);
+}
+
+.role__name {
+    font: 400 1.75rem/1 var(--display);
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+}
+
+.role__line {
     font-size: 0.9375rem;
     font-weight: 500;
-    text-align: center;
-    text-wrap: balance;
+    line-height: 1.35;
 }
 
-.partbtn--build {
-    grid-template-columns: 2rem minmax(0, 1fr);
-}
-
-/* ---------- The three builds ---------- */
-
-.spread + .spread {
-    border-top: var(--line) solid var(--ink);
-}
-
-.spread > .page {
-    padding-block: calc(var(--u) * 9) calc(var(--u) * 10);
-}
-
-.spread__head {
+.role__go {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: center;
+    place-items: center;
+    flex: none;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-s);
+    background: var(--ink);
+    color: var(--paper);
+}
+
+.role:hover .role__go .arrow {
+    translate: 0 3px;
+}
+
+/* ---------- Sections ---------- */
+
+.act {
+    padding-top: clamp(4.5rem, 10vw, 9rem);
+}
+
+.act:last-child {
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.work__head {
+    display: grid;
+    grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+    align-items: end;
     gap: calc(var(--u) * 3) calc(var(--u) * 6);
-    margin-bottom: calc(var(--u) * 6);
 }
 
-.spread__letter {
+.work__head p {
+    max-width: 24rem;
+    margin: 0 0 0.5em;
+    font-size: 1.125rem;
+}
+
+/* ---------- Where I've worked ---------- */
+
+.jobs {
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
+    padding: 0;
+    border-bottom: var(--line) solid var(--rule);
+    list-style: none;
+}
+
+.job {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 1fr) 15.5rem;
+    align-items: start;
+    column-gap: calc(var(--u) * 4);
+    padding-block: calc(var(--u) * 4.5);
+    border-top: var(--line) solid var(--rule);
+}
+
+.job__year {
     margin: 0;
-    font-size: clamp(8rem, 4rem + 9vw, 11rem);
-    font-weight: 900;
-    line-height: 0.76;
-    letter-spacing: -0.04em;
+    color: var(--fg);
+    font: 400 4.5rem/0.86 var(--display);
 }
 
-.spread__intro h2 {
-    margin: 0 0 calc(var(--u) * 2);
-    font-size: clamp(2rem, 1.3rem + 2.6vw, 3.25rem);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
+.job__title {
+    margin: 0 0 calc(var(--u) * 1.25);
+    color: var(--fg);
+    font: 700 1.625rem/1.14 var(--text);
+    font-stretch: 78%;
     text-wrap: balance;
 }
 
-.spread__intro p {
-    max-width: 36rem;
-    margin: 0;
-    font-size: 1.1875rem;
+.job__org {
+    --dot: var(--orange);
+    display: flex;
+    margin-bottom: calc(var(--u) * 2);
 }
 
-.spread__intro b {
+.job__hook {
+    max-width: 62ch;
+    margin: 0;
+}
+
+.job__meta {
+    display: grid;
+    justify-items: end;
+    gap: calc(var(--u) * 1.75);
+    margin: 0;
+    color: var(--mute);
+    font: 600 0.75rem/1.3 var(--text);
+    letter-spacing: 0.1em;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+/* Which of the three a job needed. */
+.uses {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: calc(var(--u) * 0.75);
+}
+
+/* ---------- The four roles, each with its poster ---------- */
+
+.act__head {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: end;
+    gap: calc(var(--u) * 4) clamp(2rem, 5vw, 5rem);
+}
+
+.act--flip .act__head {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+
+.act--flip .poster {
+    order: 2;
+}
+
+.poster {
+    position: relative;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 5;
+    margin: 0;
+    overflow: hidden;
+}
+
+.poster .sprite {
+    width: 68%;
+    height: 68%;
+}
+
+.poster .badge {
+    position: absolute;
+    top: clamp(1rem, 2vw, 1.75rem);
+    left: clamp(1rem, 2vw, 1.75rem);
+}
+
+.act__intro p {
+    max-width: 36rem;
+    margin: calc(var(--u) * 3) 0 0;
+    font-size: 1.125rem;
+}
+
+.act__intro b {
+    color: var(--fg);
     font-weight: 700;
 }
 
 /* His own words carry this one, so they get the volume. */
-.spread__intro--loud p {
-    max-width: 30rem;
-    font-size: clamp(1.375rem, 1.05rem + 1.2vw, 1.875rem);
-    font-weight: 600;
-    line-height: 1.22;
-    letter-spacing: -0.015em;
+.act__intro--loud p {
+    max-width: 22em;
+    color: var(--fg);
+    font: 800 clamp(1.5rem, 1rem + 1.6vw, 2.25rem)/1.04 var(--text);
+    font-stretch: 62%;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
     text-wrap: balance;
 }
 
-.spread__fig {
-    margin: 0;
-}
+/* ---------- The builder: the wall of projects ---------- */
 
-/* The work history has no letter and no model, only its heading. */
-.spread__head--plain {
-    display: block;
-}
-
-.spread__head--plain p {
-    max-width: 44rem;
-}
-
-/* Rows that aren't links: the jobs, and the community numbers. */
-.steps--plain .step:hover {
-    background: none;
-}
-
-/* Years and counts, where the blog has step numbers. */
-.step__num--sm {
-    font-size: 3.25rem;
-    line-height: 0.8;
-}
-
-.step__org {
-    margin: 0 0 var(--u);
-    font-weight: 600;
-}
-
-/* Which builds a job needed. */
-.uses {
-    display: inline-flex;
-    align-items: center;
-    gap: calc(var(--u) * 0.75);
-    color: var(--ink);
-    font-weight: 600;
-}
-
-.uses b {
+.wall {
     display: grid;
-    place-items: center;
-    width: 1.625rem;
-    height: 1.625rem;
-    border: var(--line) solid var(--ink);
-    border-radius: 6px;
-    background: var(--paper);
-    font-size: 0.8125rem;
-    font-weight: 800;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: calc(var(--u) * 1.5);
+    margin-top: clamp(2.5rem, 5vw, 4rem);
 }
 
-.steps--tally {
-    margin-bottom: calc(var(--u) * 7);
-}
-
-.steps--tally .step {
-    align-items: center;
-    padding-block: calc(var(--u) * 3);
-}
-
-.steps--tally .step__hook {
-    margin: 0;
-    font-size: 1.1875rem;
-}
-
-.fig {
-    display: block;
-    width: 11.5rem;
-    height: auto;
-    overflow: visible;
-}
-
-/* The lead project gets the full spread. */
-.feature {
-    display: grid;
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-    align-items: center;
-    gap: calc(var(--u) * 6);
-    margin: 0 calc(var(--u) * -2);
-    padding: calc(var(--u) * 5) calc(var(--u) * 2) calc(var(--u) * 6);
-    border-top: var(--line) solid var(--ink);
-}
-
-.feature__shot {
-    display: block;
+.proj {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: calc(var(--u) * 4);
+    min-height: 23rem;
+    padding: clamp(1.25rem, 2.4vw, 2rem);
     overflow: hidden;
-    border: var(--line) solid var(--ink);
-    border-radius: 14px;
-    background: #ec4561;
+    border-radius: var(--radius);
+    container-type: inline-size;
 }
 
-/* The screenshot is mostly empty red, so it is cropped in on the middle. */
-.feature__shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    scale: 1.3;
-    transition: scale 0.6s var(--ease);
+.proj--pokedex {
+    --b: var(--yellow);
+    grid-column: span 7;
+    justify-content: flex-end;
+    min-height: 35rem;
 }
 
-.feature__shot:hover img {
-    scale: 1.36;
+/* The one dark tile. It stays dark on the light wall too. */
+.proj--threadlink {
+    grid-column: span 5;
+    border: var(--stroke) solid var(--card-line);
+    background: #191919;
+    color: #d2d2cc;
 }
 
-.feature__title {
-    margin: calc(var(--u) * 2.5) 0 calc(var(--u) * 1.5);
-    font-size: clamp(1.875rem, 1.2rem + 2.1vw, 2.75rem);
-    font-weight: 700;
-    line-height: 1.06;
-    letter-spacing: -0.025em;
+.proj--whoscore {
+    --b: var(--cyan);
+    grid-column: span 5;
 }
 
-.feature__hook {
-    max-width: 34rem;
-    margin: 0 0 calc(var(--u) * 3.5);
-    font-size: 1.1875rem;
+.proj--chatterbox {
+    --b: var(--green);
+    grid-column: span 7;
 }
 
-.feature__actions {
+.proj__title {
+    margin: 0 0 calc(var(--u) * 1.5);
+    color: var(--paper);
+    font: 400 clamp(3rem, 1.5rem + 4.6vw, 5.75rem)/0.9 var(--display);
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+}
+
+.field .proj__title {
+    color: var(--ink);
+}
+
+/* The two with no screen to show are all lettering, sized to their own tile. */
+.proj--type .proj__title {
+    margin: 0;
+    font-size: clamp(3rem, 18cqw, 8.5rem);
+}
+
+.proj--whoscore .proj__title {
+    font-size: clamp(3rem, 20.5cqw, 8.5rem);
+}
+
+.proj__title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* The whole tile is the link target. */
+.proj__title a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+}
+
+.proj__title a:focus-visible {
+    outline: none;
+}
+
+.proj__title a:focus-visible::after {
+    outline: 3px solid var(--focus, var(--paper));
+    outline-offset: -6px;
+}
+
+.proj__hook {
+    max-width: 30rem;
+    margin: 0 0 calc(var(--u) * 2.5);
+    font-weight: 500;
+}
+
+.proj__meta {
     display: flex;
     flex-wrap: wrap;
-    gap: calc(var(--u) * 1.5);
+    align-items: center;
+    gap: var(--u);
     margin: 0;
 }
 
-.step:hover .step__go .arrow--out {
+.proj__go {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--u);
+    margin-left: auto;
+    font: 800 0.75rem/1 var(--text);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.proj--threadlink .proj__go {
+    color: var(--paper);
+}
+
+.proj:hover .proj__go .arrow--out {
     translate: 2px -2px;
 }
 
-/* A project's one line is all there is to read about it, so it is never cut short. */
-.steps--open .step__hook {
-    display: block;
+.proj__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--u) * 1.25);
+    margin: calc(var(--u) * 3) 0 0;
 }
 
-.spread__foot {
+/* Pokedex: two screens of the live app, in phone frames. */
+.proj--pokedex .proj__body {
+    position: relative;
+    max-width: 52%;
+}
+
+.proj__shots {
+    position: absolute;
+    top: 7%;
+    right: 4%;
+    width: 44%;
+    height: 100%;
+}
+
+.phone {
+    position: absolute;
+    width: 59%;
+    overflow: hidden;
+    border: 6px solid var(--ink);
+    border-radius: 22px;
+    background: var(--ink);
+    transition: translate 0.6s var(--ease), rotate 0.6s var(--ease);
+}
+
+.phone img,
+.laptop img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.phone--back {
+    top: 0;
+    right: 0;
+    rotate: 5deg;
+}
+
+.phone--front {
+    top: 15%;
+    left: 0;
+    rotate: -5deg;
+}
+
+.proj--pokedex:hover .phone--back {
+    translate: 6px -6px;
+    rotate: 7deg;
+}
+
+.proj--pokedex:hover .phone--front {
+    translate: -4px -8px;
+    rotate: -7deg;
+}
+
+/* Threadlink: the live site, in a laptop drawn as flat as the cards. */
+.laptop {
+    position: relative;
+    margin: 0 7% calc(var(--u) * 2);
+    border: 7px solid #333333;
+    border-bottom-width: 9px;
+    border-radius: 10px 10px 0 0;
+    background: #333333;
+    transition: translate 0.6s var(--ease);
+}
+
+.laptop::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 9px);
+    right: -9%;
+    left: -9%;
+    height: 12px;
+    border-radius: 0 0 12px 12px;
+    background: #4d4d4d;
+}
+
+.proj--threadlink:hover .laptop {
+    translate: 0 -6px;
+}
+
+/* ---------- The technical writer: under the three newest articles ---------- */
+
+.act .steps {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.act__foot {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -248,163 +476,292 @@ body {
 .kit {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--u) calc(var(--u) * 1.5);
+    gap: var(--u);
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.facts__title {
-    margin: 0 0 calc(var(--u) * 3);
-    font-size: clamp(1.5rem, 1.25rem + 1vw, 2rem);
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -0.025em;
-}
+/* ---------- The community builder: the numbers, then two fun facts ---------- */
 
-/* The gap shows the ink behind it, which draws the keyline between the two. */
-.facts {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: var(--line);
-    margin: 0 calc(var(--u) * -2);
+.tally {
+    margin: clamp(2.5rem, 5vw, 4rem) 0 0;
     padding: 0;
-    border-block: var(--line) solid var(--ink);
-    background: var(--ink);
+    border-bottom: var(--line) solid var(--rule);
     list-style: none;
 }
 
-.facts li {
-    padding: calc(var(--u) * 4) calc(var(--u) * 2);
-    background: var(--sky);
+.tally li {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+    gap: calc(var(--u) * 2) clamp(2rem, 5vw, 5rem);
+    padding-block: calc(var(--u) * 3.5);
+    border-top: var(--line) solid var(--rule);
+}
+
+.tally__num {
+    margin: 0;
+    color: var(--fg);
+    font: 400 clamp(4.5rem, 2rem + 8vw, 8rem)/0.86 var(--display);
+}
+
+.tally__text {
+    max-width: 40rem;
+    margin: 0;
     font-size: 1.1875rem;
 }
 
-.facts li + li {
-    padding-left: calc(var(--u) * 4);
+/* The technical sales list leads with words where the community's has numbers. */
+.tally--words .tally__num {
+    font-size: clamp(2.75rem, 1.5rem + 4vw, 5rem);
+    text-transform: uppercase;
 }
 
-.facts a {
-    color: var(--ink);
+.facts__title {
+    margin: clamp(3.5rem, 7vw, 5.5rem) 0 calc(var(--u) * 2.5);
+    color: var(--fg);
+    font: 800 clamp(1.5rem, 1rem + 1.6vw, 2.25rem)/1 var(--text);
+    font-stretch: 62%;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+}
+
+.facts {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: calc(var(--u) * 1.5);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* A fun fact: its subject in big letters with a pill beside it, the fact in
+   his words, and its drawing sitting in the bottom corner. */
+.fact {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 2.5);
+    min-height: 22rem;
+    padding: clamp(1.25rem, 2.6vw, 2.25rem);
+    overflow: hidden;
+}
+
+.facts .fact:first-child { --b: var(--pink); }
+.facts .fact:last-child { --b: var(--cyan); }
+
+/* One card on its own, the full width of the page: the fact a section rests
+   on. It takes its section's color. */
+.fact--wide {
+    min-height: 18rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.fact--wide .fact__text {
+    max-width: 36rem;
+}
+
+/* What each automation did: its name, then a sentence. */
+.fact__list {
+    display: grid;
+    gap: calc(var(--u) * 2.5);
+    max-width: 42rem;
+    margin: 0;
+}
+
+.fact__list dt {
+    margin: 0 0 calc(var(--u) * 0.75);
+    font: 800 1.5rem/1 var(--text);
+    font-stretch: 62%;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    word-spacing: 0.14em;
+}
+
+.fact__list dd {
+    margin: 0;
+    font-weight: 500;
+}
+
+.fact--wide .fact__art {
+    width: clamp(8rem, 16vw, 13rem);
+}
+
+/* The pill drops under the subject when the card is too narrow for both. */
+.fact__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: calc(var(--u) * 1.5) calc(var(--u) * 2);
+}
+
+.fact__title {
+    margin: 0;
+    font: 400 clamp(3.25rem, 1.5rem + 5vw, 6rem)/0.86 var(--display);
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+}
+
+.fact__text {
+    max-width: 27rem;
+    margin: 0;
+    font-size: 1.1875rem;
     font-weight: 600;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
+    line-height: 1.38;
 }
 
-/* ---------- Close ---------- */
-
-/* One letter where the blog has two digits. */
-.close__num--letter {
-    width: clamp(5.75rem, 14vw, 10rem);
+.fact__foot {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: calc(var(--u) * 2);
+    margin-top: auto;
 }
 
-/* ---------- Without JavaScript the page still reads; the drawings need it ---------- */
-
-html:not(.js) .cover__stage,
-html:not(.js) .spread__fig {
-    display: none;
+.fact .btn {
+    flex: none;
+    white-space: nowrap;
 }
 
-/* ---------- Motion ---------- */
-
-@media (prefers-reduced-motion: no-preference) {
-    /* Each build drops together the first time its section is reached. */
-    .fig--waiting .bk {
-        opacity: 0;
-    }
-
-    .fig--build .bk {
-        animation: drop-near 0.5s var(--ease) both;
-        animation-delay: calc(var(--i) * 40ms);
-    }
+/* The drawing gives way before the button's label wraps. */
+.fact__art {
+    flex: 0 1 auto;
+    width: clamp(7rem, 12vw, 10.5rem);
+    min-width: 0;
+    height: auto;
+    margin-left: auto;
+    rotate: -8deg;
+    transition: rotate 0.6s var(--ease), translate 0.6s var(--ease);
 }
 
-@keyframes drop-near {
-    from {
-        opacity: 0;
-        transform: translateY(-28px);
-    }
+.fact:hover .fact__art {
+    translate: 0 -6px;
+    rotate: 6deg;
 }
 
 /* ---------- Narrower screens ---------- */
 
-@media (max-width: 1099px) {
-    .spread__head {
-        column-gap: calc(var(--u) * 4);
+/* The row of roles answers to the opening poster's width. */
+@container (max-width: 1040px) {
+    .roles {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@container (max-width: 680px) {
+    .roles {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 959px) {
+    .job {
+        grid-template-columns: 7.5rem minmax(0, 1fr);
+        row-gap: calc(var(--u) * 2.5);
     }
 
-    .feature {
-        gap: calc(var(--u) * 4);
+    .job__year {
+        font-size: 3.75rem;
+    }
+
+    .job__meta {
+        display: flex;
+        flex-wrap: wrap;
+        grid-column: 2;
+        align-items: center;
+        gap: var(--u) calc(var(--u) * 3);
+        text-align: left;
+    }
+
+    .proj--pokedex,
+    .proj--threadlink,
+    .proj--whoscore,
+    .proj--chatterbox {
+        grid-column: 1 / -1;
+    }
+
+    .proj {
+        min-height: 18rem;
+    }
+
+    .proj--pokedex {
+        min-height: 31rem;
     }
 }
 
 @media (max-width: 719px) {
-    .cover__face {
-        width: 72px;
-        height: 72px;
-    }
-
-    .spread > .page {
-        padding-block: calc(var(--u) * 7) calc(var(--u) * 8);
-    }
-
-    .spread__head {
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: end;
-        margin-bottom: calc(var(--u) * 4);
-    }
-
-    .spread__letter {
-        font-size: 6.5rem;
-    }
-
-    .spread__intro {
-        grid-column: 1 / -1;
-        grid-row: 2;
-    }
-
-    .spread__intro p {
-        font-size: 1.0625rem;
-    }
-
-    .spread__intro--loud p {
-        font-size: 1.375rem;
-    }
-
-    .fig {
-        width: 7.5rem;
-    }
-
-    .feature {
-        grid-template-columns: minmax(0, 1fr);
-        gap: calc(var(--u) * 3);
-        padding-block: calc(var(--u) * 3.5) calc(var(--u) * 4.5);
-    }
-
-    .feature__hook,
-    .facts li,
-    .steps--tally .step__hook {
-        font-size: 1.0625rem;
-    }
-
-    .step__num--sm {
-        font-size: 2.75rem;
-    }
-
-    .steps--tally {
-        margin-bottom: calc(var(--u) * 5);
-    }
-
-    .steps--tally .step {
-        row-gap: calc(var(--u) * 1.5);
-    }
-
+    .work__head,
+    .act__head,
+    .act--flip .act__head,
+    .tally li,
     .facts {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .facts li,
-    .facts li + li {
-        padding: calc(var(--u) * 3) calc(var(--u) * 2);
+    .work__head p,
+    .act__intro p,
+    .tally__text,
+    .fact__text {
+        font-size: 1.0625rem;
+    }
+
+    .act--flip .poster {
+        order: 0;
+    }
+
+    /* A wide poster, so the heading under it stays in the first screenful. */
+    .poster {
+        aspect-ratio: 5 / 4;
+    }
+
+    .act__intro--loud p {
+        font-size: 1.625rem;
+    }
+
+    .job {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: calc(var(--u) * 2);
+        padding-block: calc(var(--u) * 3.5);
+    }
+
+    .job__meta {
+        grid-column: 1;
+    }
+
+    /* The screens go above the words instead of beside them. */
+    .proj--pokedex {
+        justify-content: flex-start;
+        min-height: 0;
+    }
+
+    .proj--pokedex .proj__body {
+        max-width: none;
+    }
+
+    .proj__shots {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: min(100%, 19rem);
+        height: 24rem;
+        margin-inline: auto;
+    }
+
+    .phone {
+        width: 54%;
+    }
+
+    .phone--front {
+        top: 8%;
+    }
+
+    .fact {
+        min-height: 17rem;
+    }
+
+    /* A tighter button leaves the drawing room on the narrowest phones. */
+    .fact .btn {
+        padding-inline: calc(var(--u) * 1.75);
     }
 }
