@@ -6,7 +6,8 @@
    between the modes; a card looks the same on either wall, except that on
    the white one it gets an ink outline. */
 
-/* Anton by Vernon Adams and Archivo by Omnibus-Type, both SIL Open Font License 1.1. */
+/* Anton by Vernon Adams, Archivo by Omnibus-Type and Inter by Rasmus Andersson,
+   all SIL Open Font License 1.1. */
 @font-face {
     font-family: 'Anton';
     src: url('fonts/anton-latin.woff2') format('woff2');
@@ -24,8 +25,16 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Inter';
+    src: url('fonts/inter-latin.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Yoruba's dotted letters and tone marks, for his name. Google files them
-   under its Vietnamese subset, which is where these two come from. They sit
+   under its Vietnamese subset, which is where these three come from. They sit
    after the Latin files so they win for the code points they cover. */
 @font-face {
     font-family: 'Anton';
@@ -41,6 +50,15 @@
     src: url('fonts/archivo-vietnamese.woff2') format('woff2');
     font-weight: 100 900;
     font-stretch: 62% 125%;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('fonts/inter-vietnamese.woff2') format('woff2');
+    font-weight: 100 900;
     font-style: normal;
     font-display: swap;
     unicode-range: U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9;
@@ -66,7 +84,8 @@
     --gutter: clamp(16px, 4vw, 40px);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
     --display: 'Anton', 'Archivo', 'Arial Narrow', sans-serif;
-    --text: 'Archivo', system-ui, sans-serif;
+    --label: 'Archivo', system-ui, sans-serif;   /* pills, buttons, labels, narrow headings */
+    --text: 'Inter', system-ui, sans-serif;      /* everything set to be read */
 
     /* The dark wall, and what is lettered straight onto it. */
     --wall: #0b0b0b;
@@ -136,6 +155,8 @@ body {
     background: var(--wall);
     color: var(--soft);
     font: 400 1.0625rem/1.55 var(--text);
+    /* No paragraph ends on a single stranded word. */
+    text-wrap: pretty;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -209,7 +230,7 @@ body {
     gap: 0.6em;
     margin: 0;
     color: var(--fg);
-    font: 600 0.75rem/1.3 var(--text);
+    font: 600 0.75rem/1.3 var(--label);
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
@@ -244,7 +265,7 @@ body {
     border-radius: 999px;
     background: var(--paper);
     color: var(--ink);
-    font: 800 0.75rem/1.15 var(--text);
+    font: 800 0.75rem/1.15 var(--label);
     letter-spacing: 0.06em;
     text-transform: uppercase;
 }
@@ -284,7 +305,7 @@ body {
     gap: calc(var(--u) * 1.5);
     min-height: 44px;
     color: var(--fg);
-    font: 800 0.8125rem/1 var(--text);
+    font: 800 0.8125rem/1 var(--label);
     letter-spacing: 0.1em;
     text-decoration: none;
     text-transform: uppercase;
@@ -309,7 +330,7 @@ body {
     min-height: 44px;
     padding-inline: var(--u);
     color: var(--soft);
-    font: 600 0.75rem/1 var(--text);
+    font: 600 0.75rem/1 var(--label);
     letter-spacing: 0.1em;
     text-decoration: none;
     text-transform: uppercase;
@@ -379,7 +400,7 @@ body {
     border-radius: var(--radius-s);
     background: transparent;
     color: var(--fg);
-    font: 700 0.8125rem/1 var(--text);
+    font: 700 0.8125rem/1 var(--label);
     letter-spacing: 0.08em;
     text-decoration: none;
     text-transform: uppercase;
@@ -506,7 +527,7 @@ body {
 .hero__tag {
     margin: 0 0 calc(var(--u) * 2.5);
     color: var(--fg);
-    font: 800 clamp(1.625rem, 2.9cqw, 2.5rem)/0.98 var(--text);
+    font: 800 clamp(1.625rem, 2.9cqw, 2.5rem)/0.98 var(--label);
     font-stretch: 62%;
     letter-spacing: 0.005em;
     text-transform: uppercase;
@@ -551,7 +572,7 @@ body {
     border-radius: var(--radius-m);
     background: none;
     color: var(--fg);
-    font: 800 1.375rem/1 var(--text);
+    font: 800 1.375rem/1 var(--label);
     font-stretch: 66%;
     letter-spacing: 0.01em;
     text-align: left;
@@ -624,7 +645,7 @@ body {
     border: 0;
     background: none;
     color: var(--fg);
-    font: 700 0.8125rem/1 var(--text);
+    font: 700 0.8125rem/1 var(--label);
     letter-spacing: 0.08em;
     text-decoration: underline;
     text-decoration-thickness: 2px;
@@ -649,7 +670,7 @@ body {
     border-radius: 999px;
     background: none;
     color: var(--fg);
-    font: 700 0.75rem/1 var(--text);
+    font: 700 0.75rem/1 var(--label);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
@@ -703,7 +724,7 @@ body {
 .step__title {
     margin: 0 0 calc(var(--u) * 1.25);
     color: var(--fg);
-    font: 700 1.625rem/1.14 var(--text);
+    font: 700 1.625rem/1.14 var(--label);
     font-stretch: 78%;
     text-wrap: balance;
 }
@@ -752,7 +773,7 @@ body {
     gap: calc(var(--u) * 0.75) calc(var(--u) * 3);
     margin: 0;
     color: var(--mute);
-    font: 600 0.75rem/1.3 var(--text);
+    font: 600 0.75rem/1.3 var(--label);
     letter-spacing: 0.1em;
     text-transform: uppercase;
 }
@@ -913,7 +934,7 @@ body {
     border: var(--line) solid var(--rule);
     border-radius: var(--radius-m);
     color: var(--fg);
-    font: 800 1.375rem/1 var(--text);
+    font: 800 1.375rem/1 var(--label);
     font-stretch: 66%;
     letter-spacing: 0.01em;
     text-decoration: none;
