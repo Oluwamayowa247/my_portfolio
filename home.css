@@ -12,8 +12,7 @@ body {
     --nudge: -0.031em;
     --mark-top: 0.27;          /* ems its tone marks stand above the capitals */
     --mark-bottom: 0.22;       /* ems the dot under the O hangs below them */
-    --under-mark: var(--u);    /* the dot's room already parts the name from the words */
-    --tile-narrow-top: calc(var(--u) * 2);
+    --under-mark: calc(var(--u) * 2);   /* the dot's room already parts the name from the words */
     --fit-close: 7.13;         /* I'M EASY TO REACH. */
     --fit-close-narrow: 3.72;  /* TO REACH. */
     --nudge-close: -0.031em;
@@ -25,11 +24,33 @@ body {
 [data-role='sales'] { --b: var(--yellow); }
 [data-role='community'] { --b: var(--green); }
 
-/* The words take both columns to the left of the tile. The blog keeps its
-   topic switches in the second one. */
-@container (width > 1040px) {
+/* The home page's opening poster has no tile. Under the name the statement
+   takes the left half, at a size the tile's room now allows, and the words
+   the right half. */
+.hero__about {
+    grid-column: 1 / -1;
+}
+
+.hero__tag {
+    font-size: clamp(2rem, 4.6cqw, 3.75rem);
+}
+
+@container (width > 760px) {
     .hero__about {
-        grid-column: 1 / 3;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: clamp(1.5rem, 3.6cqw, 3.5rem);
+        align-items: start;
+    }
+
+    .hero__tag {
+        grid-row: 1 / 3;
+        margin-bottom: 0;
+    }
+
+    .hero__about .lede,
+    .hero__about .actions {
+        grid-column: 2;
     }
 }
 
@@ -508,7 +529,7 @@ body {
 .tally__text {
     max-width: 40rem;
     margin: 0;
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
 }
 
 /* The technical sales list leads with words where the community's has numbers. */
@@ -586,6 +607,21 @@ body {
     width: clamp(8rem, 16vw, 13rem);
 }
 
+/* On a wide card the drawing stands in the corner beside the words. In a row
+   of its own it left a band of empty colour above it. */
+@media (min-width: 1040px) {
+    .fact--wide {
+        position: relative;
+    }
+
+    .fact--wide .fact__foot {
+        position: absolute;
+        right: clamp(1.25rem, 2.6vw, 2.25rem);
+        bottom: clamp(1.25rem, 2.6vw, 2.25rem);
+        margin: 0;
+    }
+}
+
 /* The pill drops under the subject when the card is too narrow for both. */
 .fact__head {
     display: flex;
@@ -597,7 +633,7 @@ body {
 
 .fact__title {
     margin: 0;
-    font: 400 clamp(3.25rem, 1.5rem + 5vw, 6rem)/0.86 var(--display);
+    font: 400 clamp(3.25rem, 1.5rem + 5vw, 6rem)/0.92 var(--display);
     letter-spacing: 0.005em;
     text-transform: uppercase;
 }
@@ -605,7 +641,7 @@ body {
 .fact__text {
     max-width: 27rem;
     margin: 0;
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.38;
 }

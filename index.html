@@ -5,6 +5,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Olutuyo Mayowa works on strategy and applied AI at AI In Nigeria. Since 2020 he has built products, written the content that explains them, sold them, and grown the communities around them.">
+        <!-- What a chat app or LinkedIn shows when the link is shared. The image has to be a full address. -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Olutuyo Máyọ̀wá - Builder, technical writer, technical sales, community builder">
+        <meta property="og:description" content="Olutuyo Mayowa works on strategy and applied AI at AI In Nigeria. Since 2020 he has built products, written the content that explains them, sold them, and grown the communities around them.">
+        <meta property="og:image" content="https://my-portfolio-olutuyo-mayowas-projects.vercel.app/images/og.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:image:alt" content="Máyọ̀wá in giant white capitals on black, above the line: I build systems across product and sales.">
+        <meta name="twitter:card" content="summary_large_image">
         <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
         <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -26,10 +35,10 @@
     </head>
     <body>
         <!--
-        THESIS: A gig-poster wall with Mayowa's own pixel-art avatar as its character. The name runs edge to edge, he stands on a flat colour tile over it, and each of the four things he does gets its own card. It refuses the portfolio stack of avatar hero, skill badges and a grid of project cards.
+        THESIS: A gig-poster wall. Mayowa's name runs edge to edge with nothing over it, his statement sits under it, and each of the four things he does gets its own card. It refuses the portfolio stack of avatar hero, skill badges and a grid of project cards.
         OWN-WORLD: A black wall or a white one, Anton capitals at poster scale, rounded cards in orange, coral, cyan, green, yellow and pink, pixel sprites drawn in black and white, white pills outlined in ink, small dark buttons. On the white wall every card gets an ink outline.
         STORY: A recruiter learns what Mayowa does now, scans his work history, sees the proof for each role (projects, articles, community numbers), and emails him.
-        FIRST VIEWPORT: MÁYỌ̀WÁ across the full width, tone marks and all; the orange tile with his pixel self over the lower third of its last letters, at the right-hand end; to the left of the tile, the tagline, the lede and "Email me"; four role cards in a row beneath.
+        FIRST VIEWPORT: MÁYỌ̀WÁ across the full width, tone marks and all; under it the statement on the left, and the lede with "Email me" on the right; four role cards in a row beneath.
         FORM: Poster wall, pinned by Mayowa's two reference images over the dealt direction. Seed b47ece11.
         FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
         -->
@@ -37,7 +46,7 @@
 
         <header class="top page">
             <a class="top__id" href="index.html">
-                <img src="images/pixel-head.svg" alt="" width="34" height="34">
+                <img class="logo" src="images/logo.svg" alt="" width="48" height="18">
                 <span>Olutuyo Máyọ̀wá</span>
             </a>
             <nav class="top__nav" aria-label="Site">
@@ -61,10 +70,6 @@
                             <a class="btn" href="blog.html">Read the blog<svg class="arrow" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
                         </p>
                     </div>
-
-                    <figure class="hero__tile">
-                        <img class="sprite sprite--stand" src="images/pixel-mayowa.svg" alt="Máyọ̀wá as a pixel-art character: glasses, a white face mask and a white shirt." width="26" height="38">
-                    </figure>
                 </div>
 
                 <section aria-labelledby="roles-title">
@@ -116,7 +121,7 @@
                             <div class="job__body">
                                 <h3 class="job__title">Sales Manager</h3>
                                 <p class="label job__org">Lendsqr</p>
-                                <p class="job__hook">I led product demos of Lendsqr's Lending-as-a-Service platform for financial institutions across Africa and beyond, turned what lenders asked for into delivery roadmaps, and trained microfinance banks, fintechs and credit-led institutions on the platform. I also built automations to take the repetitive work out of sales.</p>
+                                <p class="job__hook">I led product demos of Lendsqr's <span class="nb">Lending-as-a-Service</span> platform for financial institutions across Africa and beyond, turned what lenders asked for into delivery roadmaps, and trained microfinance banks, fintechs and credit-led institutions on the platform. I also built automations to take the repetitive work out of sales.</p>
                             </div>
                             <div class="job__meta"><span>June 2025 to May 2026</span><span class="uses"><span class="vh">Needed: </span><b class="badge badge--tint" data-role="sales">Sales</b><b class="badge badge--tint" data-role="dev">Building</b></span></div>
                         </li>
@@ -193,7 +198,7 @@
                         <article class="proj proj--type proj--whoscore field">
                             <h3 class="proj__title"><a href="https://github.com/Oluwamayowa247/whoscore">whoscore</a></h3>
                             <div class="proj__body">
-                                <p class="proj__hook">A sport community chat app, from my internship at WhoScore?. I built the interface and wired up the API calls.</p>
+                                <p class="proj__hook">A sport community chat app from my WhoScore? internship. I built the interface and wired up the API calls.</p>
                                 <p class="proj__meta"><span class="badge">Flutter</span><span class="badge">2022</span><span class="proj__go" aria-hidden="true">See the code<svg class="arrow arrow--out" viewBox="0 0 20 12"><path d="M1 6h16M12 1l6 5-6 5"/></svg></span></p>
                             </div>
                         </article>
@@ -279,14 +284,14 @@
                         </figure>
                         <div class="act__intro">
                             <h2 class="display" id="sales">Technical sales</h2>
-                            <p>I was Sales Manager at Lendsqr until May 2026, selling a Lending-as-a-Service platform to financial institutions, and before that I ran the product demos at Autogon AI. I sell technical products by showing them working, and my selling is automation-driven: I build the automations myself.</p>
+                            <p>I was Sales Manager at Lendsqr until May 2026, selling a <span class="nb">Lending-as-a-Service</span> platform to financial institutions, and before that I ran the product demos at Autogon AI. I sell technical products by showing them working, and my selling is automation-driven: I build the automations myself.</p>
                         </div>
                     </header>
 
                     <ul class="tally tally--words">
                         <li>
                             <p class="tally__num">Demos</p>
-                            <p class="tally__text">of Lendsqr's Lending-as-a-Service platform for financial institutions across Africa and beyond, and of Omniguard360, Autogon AI's flagship fraud solution.</p>
+                            <p class="tally__text">of Lendsqr's <span class="nb">Lending-as-a-Service</span> platform for financial institutions across Africa and beyond, and of Omniguard360, Autogon AI's flagship fraud solution.</p>
                         </li>
                         <li>
                             <p class="tally__num">Roadmaps</p>
@@ -307,7 +312,7 @@
                         <dl class="fact__list">
                             <div>
                                 <dt>ICP profiling</dt>
-                                <dd>I match each lead against pre-defined ideal customer profile (ICP) criteria and deliver a score, so the outreach is informed. I've run it on signups and on book-a-call pages.</dd>
+                                <dd>I match each lead against pre-defined ideal customer profile (ICP) criteria and deliver a score, so the outreach is informed. I've run it on signups and on <span class="nb">book-a-call</span> pages.</dd>
                             </div>
                         </dl>
                         <div class="fact__foot">
@@ -386,7 +391,7 @@
                         <li><a class="golink" href="https://twitter.com/MayowaOlutuyo">Twitter<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
                     </ul>
                     <p class="close__by">
-                        <img src="images/pixel-head.svg" alt="" width="56" height="56" loading="lazy">
+                        <img class="logo" src="images/logo.svg" alt="" width="76" height="29" loading="lazy">
                         <span><b>Olutuyo Máyọ̀wá</b>Strategy and applied AI at AI In Nigeria. Builder, technical writer, technical sales, community builder. <a href="blog.html">Read the blog</a></span>
                     </p>
                 </div>

@@ -184,6 +184,11 @@ body {
     white-space: nowrap;
 }
 
+/* A hyphenated name that must stay on one line. */
+.nb {
+    white-space: nowrap;
+}
+
 .skip {
     position: absolute;
     left: calc(var(--u) * 2);
@@ -311,10 +316,19 @@ body {
     text-transform: uppercase;
 }
 
-.top__id img {
-    width: 34px;
-    height: 34px;
+/* The logo: Mayowa's glasses in their own blue, which would sink into the
+   black wall, so they sit on a white tile. The width set here is the
+   glasses'; the tile grows round them, and takes a card's outline on the
+   white wall. */
+.logo {
+    box-sizing: content-box;
     flex: none;
+    width: 48px;
+    height: auto;
+    padding: 7px 10px;
+    border: var(--stroke) solid var(--card-line);
+    border-radius: var(--radius-s);
+    background: var(--paper);
 }
 
 .top__nav {
@@ -496,7 +510,7 @@ body {
     background: var(--orange);
 }
 
-/* A figure stands on the tile's bottom edge; an object sits in its middle. */
+/* The object on a tile sits in its middle. */
 .hero__tile .sprite,
 .close__tile .sprite {
     position: absolute;
@@ -505,14 +519,6 @@ body {
     width: 64%;
     height: 64%;
     translate: -50% -50%;
-}
-
-.hero__tile .sprite--stand {
-    top: auto;
-    bottom: 0;
-    width: auto;
-    height: 86%;
-    translate: -50% 0;
 }
 
 .hero__about,
@@ -610,7 +616,7 @@ body {
 .hero__hint {
     margin: calc(var(--u) * 1.5) 0 0;
     color: var(--mute);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
 }
 
 /* ---------- The list of posts ---------- */
@@ -664,7 +670,7 @@ body {
 }
 
 .seg__btn {
-    min-height: 40px;
+    min-height: 44px;
     padding: 0 calc(var(--u) * 2);
     border: 0;
     border-radius: 999px;
@@ -910,7 +916,7 @@ body {
     grid-column: 1;
     max-width: 30rem;
     color: var(--fg);
-    font-size: 1.1875rem;
+    font-size: 1.125rem;
 }
 
 .close__links {
@@ -963,10 +969,10 @@ body {
     font-size: 0.9375rem;
 }
 
-.close__by img {
-    flex: none;
-    width: 56px;
-    height: 56px;
+.close__by .logo {
+    width: 76px;
+    padding: 11px 14px;
+    border-radius: var(--radius-m);
 }
 
 .close__by b {
@@ -1109,13 +1115,12 @@ html:not(.js) .pick {
     .hero__grid { --tile: min(62cqw, 20rem); }
 
     /* One column, with the tile in the middle under the wordmark. A narrow
-       wordmark has less to spare, so the tile takes less of it, or none
-       where there is a dot under the name to keep clear. */
+       wordmark has less to spare, so the tile takes less of it. */
     .hero__tile {
         grid-column: 1;
         justify-self: center;
         width: var(--tile);
-        margin-top: var(--tile-narrow-top, calc(var(--mark) * -0.27));
+        margin-top: calc(var(--mark) * -0.27);
     }
 
     .hero__about {
@@ -1126,6 +1131,10 @@ html:not(.js) .pick {
     .close__grid {
         --big: calc(100cqw / var(--fit-close-narrow));
         --tile: min(56cqw, 17rem);
+    }
+
+    .close__title {
+        line-height: 0.92;
     }
 
     .close__title > span {
@@ -1149,7 +1158,7 @@ html:not(.js) .pick {
 }
 
 @media (max-width: 719px) {
-    /* The wordmark below says the name; the bar keeps the face. */
+    /* The wordmark below says the name; the bar keeps the logo. */
     .top__id span {
         position: absolute;
         width: 1px;
@@ -1202,5 +1211,35 @@ html:not(.js) .pick {
 
     .close__text {
         font-size: 1.0625rem;
+    }
+}
+
+@media (max-width: 419px) {
+    /* The glasses are wider than the face they replaced, and the bar has no
+       room to spare on a small phone: the tile tightens and the links close
+       up to make way for it. */
+    .top {
+        gap: var(--u);
+    }
+
+    .top__id .logo {
+        width: 40px;
+        padding: 6px 8px;
+    }
+
+    .top__nav {
+        gap: 0;
+    }
+
+    .theme {
+        margin-left: calc(var(--u) / 2);
+    }
+}
+
+@media (max-width: 359px) {
+    /* The smallest phones: the logo already leads home, so the bar drops
+       that link to keep the page from scrolling sideways. */
+    .top__nav a[href='index.html'] {
+        display: none;
     }
 }
