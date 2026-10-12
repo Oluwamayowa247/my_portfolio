@@ -5,54 +5,11 @@ body {
     padding-bottom: 0;
 }
 
-/* How many ems wide each line of giant lettering is, and how far its first
-   letter sits in from the edge. Measured in Anton; change them with the words. */
-:root {
-    --fit: 3.3;                /* MÁYỌ̀WÁ */
-    --nudge: -0.031em;
-    --mark-top: 0.27;          /* ems its tone marks stand above the capitals */
-    --mark-bottom: 0.22;       /* ems the dot under the O hangs below them */
-    --under-mark: calc(var(--u) * 2);   /* the dot's room already parts the name from the words */
-    --fit-close: 7.13;         /* I'M EASY TO REACH. */
-    --fit-close-narrow: 3.72;  /* TO REACH. */
-    --nudge-close: -0.031em;
-}
-
 /* One color for each of the four things he does, used wherever one is named. */
 [data-role='dev'] { --b: var(--coral); }
 [data-role='writing'] { --b: var(--cyan); }
 [data-role='sales'] { --b: var(--yellow); }
 [data-role='community'] { --b: var(--green); }
-
-/* The home page's opening poster has no tile. Under the name the statement
-   takes the left half, at a size the tile's room now allows, and the words
-   the right half. */
-.hero__about {
-    grid-column: 1 / -1;
-}
-
-.hero__tag {
-    font-size: clamp(2rem, 4.6cqw, 3.75rem);
-}
-
-@container (width > 760px) {
-    .hero__about {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-        column-gap: clamp(1.5rem, 3.6cqw, 3.5rem);
-        align-items: start;
-    }
-
-    .hero__tag {
-        grid-row: 1 / 3;
-        margin-bottom: 0;
-    }
-
-    .hero__about .lede,
-    .hero__about .actions {
-        grid-column: 2;
-    }
-}
 
 /* ---------- The four roles, in a row under the opening poster ---------- */
 
@@ -60,7 +17,7 @@ body {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: calc(var(--u) * 1.5);
-    margin: clamp(1.5rem, 2.6cqw, 2.25rem) 0 0;
+    margin: calc(var(--u) * 1.5) 0 0;
     padding: 0;
     list-style: none;
 }
@@ -74,10 +31,30 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--u);
-    padding: calc(var(--u) * 2) calc(var(--u) * 2.25) calc(var(--u) * 2.25);
-    border-radius: var(--radius-m);
+    padding: calc(var(--u) * 2.25);
     text-decoration: none;
     transition: translate 0.3s var(--ease);
+}
+
+.role:hover {
+    translate: 0 -4px;
+}
+
+.role:focus-visible {
+    outline-color: var(--fg);
+}
+
+/* A name of two words takes two lines; one of a single word keeps the room. */
+.role__name {
+    min-height: 1.8em;
+    font: 400 clamp(1.5rem, 2.7cqw, 2.25rem)/0.9 var(--display);
+    text-transform: uppercase;
+}
+
+.role__line {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1.4;
 }
 
 .role__foot {
@@ -86,27 +63,7 @@ body {
     justify-content: space-between;
     gap: var(--u);
     margin-top: auto;
-    padding-top: var(--u);
-}
-
-.role:hover {
-    translate: 0 -3px;
-}
-
-.role:focus-visible {
-    outline-color: var(--fg);
-}
-
-.role__name {
-    font: 400 1.75rem/1 var(--display);
-    letter-spacing: 0.005em;
-    text-transform: uppercase;
-}
-
-.role__line {
-    font-size: 0.9375rem;
-    font-weight: 500;
-    line-height: 1.35;
+    padding-top: calc(var(--u) * 1.5);
 }
 
 .role__go {
@@ -115,7 +72,7 @@ body {
     flex: none;
     width: 36px;
     height: 36px;
-    border-radius: var(--radius-s);
+    border-radius: 50%;
     background: var(--ink);
     color: var(--paper);
 }
@@ -130,10 +87,6 @@ body {
     padding-top: clamp(4.5rem, 10vw, 9rem);
 }
 
-.act:last-child {
-    padding-bottom: clamp(2rem, 5vw, 4rem);
-}
-
 .work__head {
     display: grid;
     grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
@@ -143,7 +96,7 @@ body {
 
 .work__head p {
     max-width: 24rem;
-    margin: 0 0 0.5em;
+    margin: 0 0 0.35em;
     font-size: 1.125rem;
 }
 
@@ -158,7 +111,7 @@ body {
 
 .job {
     display: grid;
-    grid-template-columns: 9.5rem minmax(0, 1fr) 15.5rem;
+    grid-template-columns: 10.5rem minmax(0, 1fr) 15.5rem;
     align-items: start;
     column-gap: calc(var(--u) * 4);
     padding-block: calc(var(--u) * 4.5);
@@ -166,21 +119,21 @@ body {
 }
 
 .job__year {
-    margin: 0;
+    margin: 0.06em 0 0;
     color: var(--fg);
-    font: 400 4.5rem/0.86 var(--display);
+    font: 400 3.25rem/0.86 var(--display);
 }
 
 .job__title {
     margin: 0 0 calc(var(--u) * 1.25);
     color: var(--fg);
-    font: 700 1.625rem/1.14 var(--label);
-    font-stretch: 78%;
+    font: 650 expanded 1.5rem/1.16 var(--text);
+    letter-spacing: -0.01em;
     text-wrap: balance;
 }
 
 .job__org {
-    --dot: var(--orange);
+    --label-dot: var(--orange);
     display: flex;
     margin-bottom: calc(var(--u) * 2);
 }
@@ -190,19 +143,18 @@ body {
     margin: 0;
 }
 
+/* The dates are handwritten; the pills under them say which roles a job needed. */
 .job__meta {
     display: grid;
     justify-items: end;
-    gap: calc(var(--u) * 1.75);
+    gap: calc(var(--u) * 1.5);
     margin: 0;
-    color: var(--mute);
-    font: 600 0.75rem/1.3 var(--label);
-    letter-spacing: 0.1em;
+    font: 400 1.4375rem/1.15 var(--hand);
+    letter-spacing: 0.02em;
     text-align: right;
-    text-transform: uppercase;
+    text-transform: lowercase;
 }
 
-/* Which of the three a job needed. */
 .uses {
     display: flex;
     flex-wrap: wrap;
@@ -227,6 +179,8 @@ body {
     order: 2;
 }
 
+/* A card in the role's colour with the three dots, a drawing, and a
+   handwritten note. */
 .poster {
     position: relative;
     display: grid;
@@ -236,15 +190,33 @@ body {
     overflow: hidden;
 }
 
-.poster .sprite {
-    width: 68%;
-    height: 68%;
+.poster .dots {
+    position: absolute;
+    top: var(--pad);
+    left: var(--pad);
 }
 
-.poster .badge {
+.poster .sprite {
+    width: 62%;
+    height: 62%;
+}
+
+.poster__note {
     position: absolute;
-    top: clamp(1rem, 2vw, 1.75rem);
-    left: clamp(1rem, 2vw, 1.75rem);
+    bottom: calc(var(--pad) * 0.8);
+    left: var(--pad);
+    margin: 0;
+    font-size: clamp(1.4375rem, 1rem + 1.1vw, 1.875rem);
+}
+
+/* The heading is sized to its own column, so the longest word in any of
+   them ("community") always fits on a line. */
+.act__intro {
+    container-type: inline-size;
+}
+
+.act__intro .display {
+    font-size: clamp(2.5rem, 14.5cqw, 6.25rem);
 }
 
 .act__intro p {
@@ -260,12 +232,10 @@ body {
 
 /* His own words carry this one, so they get the volume. */
 .act__intro--loud p {
-    max-width: 22em;
+    max-width: 21em;
     color: var(--fg);
-    font: 800 clamp(1.5rem, 1rem + 1.6vw, 2.25rem)/1.04 var(--label);
-    font-stretch: 62%;
-    letter-spacing: 0.005em;
-    text-transform: uppercase;
+    font: 500 expanded clamp(1.375rem, 1rem + 1.5vw, 2rem)/1.16 var(--text);
+    letter-spacing: -0.01em;
     text-wrap: balance;
 }
 
@@ -285,7 +255,7 @@ body {
     justify-content: space-between;
     gap: calc(var(--u) * 4);
     min-height: 23rem;
-    padding: clamp(1.25rem, 2.4vw, 2rem);
+    padding: var(--pad);
     overflow: hidden;
     border-radius: var(--radius);
     container-type: inline-size;
@@ -319,8 +289,7 @@ body {
 .proj__title {
     margin: 0 0 calc(var(--u) * 1.5);
     color: var(--paper);
-    font: 400 clamp(3rem, 1.5rem + 4.6vw, 5.75rem)/0.9 var(--display);
-    letter-spacing: 0.005em;
+    font: 400 clamp(2.25rem, 13cqw, 4.25rem)/0.88 var(--display);
     text-transform: uppercase;
 }
 
@@ -331,11 +300,7 @@ body {
 /* The two with no screen to show are all lettering, sized to their own tile. */
 .proj--type .proj__title {
     margin: 0;
-    font-size: clamp(3rem, 18cqw, 8.5rem);
-}
-
-.proj--whoscore .proj__title {
-    font-size: clamp(3rem, 20.5cqw, 8.5rem);
+    font-size: clamp(2.25rem, 13cqw, 6rem);
 }
 
 .proj__title a {
@@ -379,8 +344,8 @@ body {
     align-items: center;
     gap: var(--u);
     margin-left: auto;
-    font: 800 0.75rem/1 var(--label);
-    letter-spacing: 0.08em;
+    font: 650 expanded 0.75rem/1 var(--text);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
@@ -399,10 +364,14 @@ body {
     margin: calc(var(--u) * 3) 0 0;
 }
 
-/* Pokedex: two screens of the live app, in phone frames. */
+/* Pokedex: two screens of the app, in phone frames. */
 .proj--pokedex .proj__body {
     position: relative;
-    max-width: 52%;
+    max-width: 50%;
+}
+
+.proj--pokedex .proj__title {
+    font-size: clamp(2.25rem, 8.6cqw, 3.75rem);
 }
 
 .proj__shots {
@@ -452,7 +421,7 @@ body {
     rotate: -7deg;
 }
 
-/* Threadlink: the live site, in a laptop drawn as flat as the cards. */
+/* Threadlink: the site itself, in a laptop drawn as flat as the cards. */
 .laptop {
     position: relative;
     margin: 0 7% calc(var(--u) * 2);
@@ -523,7 +492,7 @@ body {
 .tally__num {
     margin: 0;
     color: var(--fg);
-    font: 400 clamp(4.5rem, 2rem + 8vw, 8rem)/0.86 var(--display);
+    font: 400 clamp(3.5rem, 1.5rem + 6vw, 6.5rem)/0.86 var(--display);
 }
 
 .tally__text {
@@ -534,17 +503,15 @@ body {
 
 /* The technical sales list leads with words where the community's has numbers. */
 .tally--words .tally__num {
-    font-size: clamp(2.75rem, 1.5rem + 4vw, 5rem);
+    font-size: clamp(2.5rem, 1.2rem + 4vw, 4.5rem);
     text-transform: uppercase;
 }
 
 .facts__title {
     margin: clamp(3.5rem, 7vw, 5.5rem) 0 calc(var(--u) * 2.5);
     color: var(--fg);
-    font: 800 clamp(1.5rem, 1rem + 1.6vw, 2.25rem)/1 var(--label);
-    font-stretch: 62%;
-    letter-spacing: 0.005em;
-    text-transform: uppercase;
+    font: 500 expanded clamp(1.375rem, 1rem + 1.5vw, 2rem)/1.1 var(--text);
+    letter-spacing: -0.01em;
 }
 
 .facts {
@@ -563,7 +530,7 @@ body {
     flex-direction: column;
     gap: calc(var(--u) * 2.5);
     min-height: 22rem;
-    padding: clamp(1.25rem, 2.6vw, 2.25rem);
+    padding: var(--pad);
     overflow: hidden;
 }
 
@@ -571,10 +538,16 @@ body {
 .facts .fact:last-child { --b: var(--cyan); }
 
 /* One card on its own, the full width of the page: the fact a section rests
-   on. It takes its section's color. */
+   on. It takes its section's color and the three dots. Its heading is sized
+   to the card, so its long first word always fits. */
 .fact--wide {
     min-height: 18rem;
     margin-top: clamp(2.5rem, 5vw, 4rem);
+    container-type: inline-size;
+}
+
+.fact--wide .fact__title {
+    font-size: clamp(1.875rem, 11.5cqw, 4.75rem);
 }
 
 .fact--wide .fact__text {
@@ -591,11 +564,8 @@ body {
 
 .fact__list dt {
     margin: 0 0 calc(var(--u) * 0.75);
-    font: 800 1.5rem/1 var(--label);
-    font-stretch: 62%;
-    letter-spacing: 0.005em;
-    text-transform: uppercase;
-    word-spacing: 0.14em;
+    font: 650 expanded 1.25rem/1.1 var(--text);
+    letter-spacing: -0.01em;
 }
 
 .fact__list dd {
@@ -616,8 +586,8 @@ body {
 
     .fact--wide .fact__foot {
         position: absolute;
-        right: clamp(1.25rem, 2.6vw, 2.25rem);
-        bottom: clamp(1.25rem, 2.6vw, 2.25rem);
+        right: var(--pad);
+        bottom: var(--pad);
         margin: 0;
     }
 }
@@ -633,8 +603,7 @@ body {
 
 .fact__title {
     margin: 0;
-    font: 400 clamp(3.25rem, 1.5rem + 5vw, 6rem)/0.92 var(--display);
-    letter-spacing: 0.005em;
+    font: 400 clamp(2.5rem, 1.2rem + 4vw, 4.75rem)/0.88 var(--display);
     text-transform: uppercase;
 }
 
@@ -642,8 +611,8 @@ body {
     max-width: 27rem;
     margin: 0;
     font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.38;
+    font-weight: 550;
+    line-height: 1.45;
 }
 
 .fact__foot {
@@ -656,7 +625,6 @@ body {
 
 .fact .btn {
     flex: none;
-    white-space: nowrap;
 }
 
 /* The drawing gives way before the button's label wraps. */
@@ -675,12 +643,33 @@ body {
     rotate: 6deg;
 }
 
+/* ---------- The closing line: one row on a wide screen, two on a narrow one ---------- */
+
+.close__title .mark__svg--narrow {
+    display: none;
+}
+
+@container (max-width: 680px) {
+    .close__title .mark__svg--wide {
+        display: none;
+    }
+
+    .close__title .mark__svg--narrow {
+        display: block;
+    }
+}
+
 /* ---------- Narrower screens ---------- */
 
 /* The row of roles answers to the opening poster's width. */
 @container (max-width: 1040px) {
     .roles {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .role__name {
+        min-height: 0;
+        font-size: 2rem;
     }
 }
 
@@ -692,12 +681,12 @@ body {
 
 @media (max-width: 959px) {
     .job {
-        grid-template-columns: 7.5rem minmax(0, 1fr);
+        grid-template-columns: 8.5rem minmax(0, 1fr);
         row-gap: calc(var(--u) * 2.5);
     }
 
     .job__year {
-        font-size: 3.75rem;
+        font-size: 2.625rem;
     }
 
     .job__meta {
@@ -750,8 +739,13 @@ body {
         aspect-ratio: 5 / 4;
     }
 
+    .poster .sprite {
+        width: 52%;
+        height: 52%;
+    }
+
     .act__intro--loud p {
-        font-size: 1.625rem;
+        font-size: 1.375rem;
     }
 
     .job {
@@ -772,6 +766,10 @@ body {
 
     .proj--pokedex .proj__body {
         max-width: none;
+    }
+
+    .proj--pokedex .proj__title {
+        font-size: clamp(2.25rem, 13cqw, 4.25rem);
     }
 
     .proj__shots {
@@ -797,6 +795,6 @@ body {
 
     /* A tighter button leaves the drawing room on the narrowest phones. */
     .fact .btn {
-        padding-inline: calc(var(--u) * 1.75);
+        padding-inline: calc(var(--u) * 2);
     }
 }

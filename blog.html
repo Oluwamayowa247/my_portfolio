@@ -17,10 +17,11 @@
         <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
         <link rel="icon" href="favicon.svg" type="image/svg+xml">
-        <link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="fonts/archivo-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/ericaone-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/hubotsans-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/monasans-digits.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/annie-latin.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="fonts/hubotsans-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="blog.css">
         <script>
@@ -34,11 +35,11 @@
     </head>
     <body>
         <!--
-        THESIS: The blog is a poster wall for the writing. Every article is numbered in the order it was written, and the newest one is the card you meet first. It refuses the dev-blog grid of cover-image cards with tag pills.
-        OWN-WORLD: A black wall or a white one, Anton capitals at poster scale, rounded cards in orange, cyan, coral, green and yellow, pixel sprites drawn in black and white, white pills outlined in ink.
+        THESIS: The blog is the same poster wall, turned to the writing. Every article is numbered in the order it was written, and the newest one is the card you meet first. It refuses the dev-blog grid of cover-image cards with tag pills.
+        OWN-WORLD: A black wall or a white one. Erica One capitals with their counters nearly shut, stretched tall and run edge to edge; Annie Use Your Telescope handwriting for dates, counts and the line under each giant word; Hubot Sans set wide for everything read. Round-cornered sheets with three dots in the corner, cards in orange, coral, cyan, green, yellow and pink, white pills outlined in ink, pill-shaped buttons, pixel sprites drawn in black and white. On the white wall every card gets an ink outline.
         STORY: A recruiter sees what Mayowa writes about, meets the newest article first, opens it, and finds how to reach him.
-        FIRST VIEWPORT: ARTICLES across the full width; the orange tile with a pixel typewriter over the lower third of its last letters, at the right-hand end; to the left of the tile, the tagline, lede and "Start at the newest post", then the four topics, each a filter.
-        FORM: Poster wall, pinned by Mayowa's two reference images over the dealt direction. Seed b47ece11.
+        FIRST VIEWPORT: ARTICLES across the full width; under it the handwritten line (how many posts, the four topics, how long they take to read); then the sheet, with three dots, the tagline and a pixel typewriter on its orange head, and the lede with "Start at the newest post" under it. The four topic switches sit under the sheet.
+        FORM: Poster wall, relettered and relaid from Mayowa's third reference image (the Bayomi rebrand poster) on the colours he already had, pinned over the dealt direction. Seed b9a15ab2.
         FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
         -->
         <a class="skip" href="#steps">Skip to the posts</a>
@@ -58,33 +59,37 @@
 
         <main>
             <div class="hero page">
-                <div class="hero__grid">
-                    <h1 class="mark"><span class="mark__in"><span class="vh">My </span>Articles<span class="vh">.</span></span></h1>
+                <h1 class="mark">
+                    <span class="vh">My articles.</span>
+                    <svg class="mark__svg" viewBox="0 0 5084 728" preserveAspectRatio="none" style="--w: 5084; --h: 728" aria-hidden="true" focusable="false"><g class="mark__in"><text x="-10" y="712" textLength="5105" lengthAdjust="spacingAndGlyphs">ARTICLES</text></g></svg>
+                </h1>
+                <p class="meta"><span><span class="js-total">14</span> posts</span><span>flutter . dev life . android . backend</span><span><span class="js-minutes-total">35</span> minutes of reading</span></p>
 
-                    <div class="hero__about">
+                <div class="sheet">
+                    <div class="sheet__head field">
+                        <span class="dots" aria-hidden="true"></span>
                         <p class="hero__tag">Some assembly required.</p>
+                        <img class="sprite sheet__art" src="images/pixel-typewriter.svg" alt="" width="30" height="25">
+                    </div>
+                    <div class="sheet__body">
                         <p class="lede"><b class="js-total">14</b> posts, about <b class="js-minutes-total">35</b> minutes of reading, written between <span class="js-range">December 2020 and September 2023</span>. They're numbered in the order I wrote them, so number 1 is where it all started.</p>
                         <p class="actions">
                             <a class="btn btn--primary" href="#steps">Start at the newest post<svg class="arrow arrow--down" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
                             <a class="btn" href="https://mayourwa.hashnode.dev">Open the blog on Hashnode<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a>
                         </p>
                     </div>
-
-                    <figure class="hero__tile" aria-hidden="true">
-                        <img class="sprite" src="images/pixel-typewriter.svg" alt="" width="30" height="25">
-                    </figure>
-
-                    <section class="hero__side" aria-labelledby="topics-title">
-                        <h2 class="label" id="topics-title">What I write about</h2>
-                        <ul class="picks">
-                            <li><button type="button" class="pick" data-topic="flutter" aria-pressed="false"><span class="pick__key"><span class="js-count">8</span></span><span class="pick__name">Flutter</span></button></li>
-                            <li><button type="button" class="pick" data-topic="devlife" aria-pressed="false"><span class="pick__key"><span class="js-count">3</span></span><span class="pick__name">Dev life</span></button></li>
-                            <li><button type="button" class="pick" data-topic="android" aria-pressed="false"><span class="pick__key"><span class="js-count">2</span></span><span class="pick__name">Android &amp; Java</span></button></li>
-                            <li><button type="button" class="pick" data-topic="backend" aria-pressed="false"><span class="pick__key"><span class="js-count">1</span></span><span class="pick__name">Backend</span></button></li>
-                        </ul>
-                        <p class="hero__hint">Pick a topic to see only its posts.</p>
-                    </section>
                 </div>
+
+                <section class="topics" aria-labelledby="topics-title">
+                    <h2 class="label" id="topics-title">What I write about</h2>
+                    <ul class="picks">
+                        <li><button type="button" class="pick" data-topic="flutter" aria-pressed="false"><span class="pick__key"><span class="js-count">8</span></span><span class="pick__name">Flutter</span></button></li>
+                        <li><button type="button" class="pick" data-topic="devlife" aria-pressed="false"><span class="pick__key"><span class="js-count">3</span></span><span class="pick__name">Dev life</span></button></li>
+                        <li><button type="button" class="pick" data-topic="android" aria-pressed="false"><span class="pick__key"><span class="js-count">2</span></span><span class="pick__name">Android &amp; Java</span></button></li>
+                        <li><button type="button" class="pick" data-topic="backend" aria-pressed="false"><span class="pick__key"><span class="js-count">1</span></span><span class="pick__name">Backend</span></button></li>
+                    </ul>
+                    <p class="hero__hint hand">Pick a topic to see only its posts.</p>
+                </section>
             </div>
 
             <section class="build page" id="steps" aria-labelledby="steps-title">
@@ -259,21 +264,33 @@
 
         <footer class="close">
             <div class="close__inner page">
-                <div class="close__grid">
-                    <h2 class="close__title"><span>Number <span class="js-next">15</span></span> <span>isn't written</span> <span>yet.</span></h2>
-                    <div class="close__tile" aria-hidden="true"><img class="sprite" src="images/pixel-page.svg" alt="" width="20" height="26" loading="lazy"></div>
-                    <p class="close__text">When I publish it, it shows up here on its own. Until then, if you want to talk about a role, a project, or what I should write next, I'm easy to reach.</p>
-                    <ul class="close__links">
-                        <li><a class="btn btn--primary" href="mailto:mayowaolutuyo@gmail.com">Email me</a></li>
-                        <li><a class="golink" href="https://www.linkedin.com/in/olutuyo-mayowa-a044951aa/">LinkedIn<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
-                        <li><a class="golink" href="https://github.com/Oluwamayowa247">GitHub<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
-                        <li><a class="golink" href="https://twitter.com/MayowaOlutuyo">Twitter<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
-                    </ul>
-                    <p class="close__by">
-                        <img class="logo" src="images/logo.svg" alt="" width="76" height="29" loading="lazy">
-                        <span><b>Olutuyo Máyọ̀wá</b>Strategy and applied AI at AI In Nigeria. Builder, technical writer, technical sales, community builder. <a href="index.html">More about me</a></span>
-                    </p>
+                <h2 class="close__title">
+                    <span class="vh">Number <span class="js-next">15</span> isn't written yet.</span>
+                    <svg class="mark__svg" viewBox="0 0 8876 768" preserveAspectRatio="none" style="--w: 8876; --h: 768" aria-hidden="true" focusable="false"><text x="-20" y="752" textLength="8920" lengthAdjust="spacingAndGlyphs">NUMBER <tspan class="js-next">15</tspan> ISN'T</text></svg>
+                    <svg class="mark__svg" viewBox="0 0 7610 728" preserveAspectRatio="none" style="--w: 7610; --h: 728" aria-hidden="true" focusable="false"><text x="-10" y="712" textLength="7629" lengthAdjust="spacingAndGlyphs">WRITTEN YET.</text></svg>
+                </h2>
+                <p class="meta"><span><span class="js-total">14</span> so far</span><span>flutter . dev life . android . backend</span><span>since december 2020</span></p>
+
+                <div class="sheet">
+                    <div class="sheet__head field">
+                        <span class="dots" aria-hidden="true"></span>
+                        <p class="close__text">When I publish it, it shows up here on its own. Until then, if you want to talk about a role, a project, or what I should write next, I'm easy to reach.</p>
+                        <img class="sprite sheet__art" src="images/pixel-page.svg" alt="" width="20" height="26" loading="lazy">
+                    </div>
+                    <div class="sheet__body">
+                        <ul class="close__links">
+                            <li><a class="btn btn--primary" href="mailto:mayowaolutuyo@gmail.com">Email me</a></li>
+                            <li><a class="btn" href="https://www.linkedin.com/in/olutuyo-mayowa-a044951aa/">LinkedIn<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
+                            <li><a class="btn" href="https://github.com/Oluwamayowa247">GitHub<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
+                            <li><a class="btn" href="https://twitter.com/MayowaOlutuyo">Twitter<svg class="arrow arrow--out" viewBox="0 0 20 12" aria-hidden="true"><path d="M1 6h16M12 1l6 5-6 5"/></svg></a></li>
+                        </ul>
+                    </div>
                 </div>
+
+                <p class="close__by">
+                    <img class="logo" src="images/logo.svg" alt="" width="76" height="29" loading="lazy">
+                    <span><b>Olutuyo Máyọ̀wá</b>Strategy and applied AI at AI In Nigeria. Builder, technical writer, technical sales, community builder. <a href="index.html">More about me</a></span>
+                </p>
             </div>
         </footer>
 

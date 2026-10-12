@@ -1,11 +1,87 @@
 /* Blog page only. The poster world it shares with the home page is in style.css. */
 
-/* How many ems wide each line of giant lettering is, and how far its first
-   letter sits in from the edge. Measured in Anton; change them with the words. */
-:root {
-    --fit: 3.32;                /* ARTICLES */
-    --nudge: -0.016em;
-    --fit-close: 11.32;         /* NUMBER 15 ISN'T WRITTEN YET. */
-    --fit-close-narrow: 5.18;   /* ISN'T WRITTEN */
-    --nudge-close: -0.031em;
+/* ---------- The topic switches under the opening poster ---------- */
+
+/* Each one is a filter for the list of posts. */
+.topics {
+    margin-top: clamp(1.5rem, 3cqw, 2.5rem);
+}
+
+.picks {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--u);
+    margin: calc(var(--u) * 1.5) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pick {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    align-items: center;
+    gap: calc(var(--u) * 1.75);
+    width: 100%;
+    min-height: 60px;
+    padding: var(--u);
+    border: var(--line) solid var(--rule);
+    border-radius: 999px;
+    background: none;
+    color: var(--fg);
+    font: 650 expanded 1rem/1.1 var(--text);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+/* The count of a topic's posts, on a chip in the topic's colour. */
+.pick__key {
+    display: grid;
+    place-items: center;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: var(--b);
+    color: var(--ink);
+    font: 800 expanded 1.125rem/1 var(--text);
+}
+
+.pick:hover {
+    border-color: var(--fg);
+    background: var(--wall-raised);
+}
+
+.pick[aria-pressed='true'] {
+    border-color: var(--fg);
+    background: var(--fg);
+    color: var(--wall);
+}
+
+.pick[aria-pressed='true'] .pick__key {
+    outline: var(--stroke) solid var(--wall);
+}
+
+.hero__hint {
+    margin: calc(var(--u) * 1.5) 0 0;
+    color: var(--mute);
+}
+
+html:not(.js) .hero__hint {
+    display: none;
+}
+
+html:not(.js) .pick {
+    cursor: default;
+}
+
+/* The switches answer to the opening poster's width. */
+@container (max-width: 900px) {
+    .picks {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@container (max-width: 480px) {
+    .picks {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
